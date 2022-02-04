@@ -16,6 +16,9 @@ class AppImages {
   static String iconList = 'assets/images/ic_list.png';
   static String iconMap = 'assets/images/ic_map.png';
   static String chatIcon = 'assets/images/icons8-chat-100.png';
+  static String noInternetConnection = 'assets/images/noConnectioncCoud.png';
+
+  // svg
   static String icCurrentLocation = 'assets/images/ic_current_location.svg';
   static String back_black = 'assets/images/ic_back_black.svg';
   static String icLocationPin = 'assets/images/ic_location_pin.svg';
@@ -26,10 +29,10 @@ class AppImages {
   static String filter = 'assets/images/Filter.svg';
   static String send = 'assets/images/Send.svg';
   static String send_active = 'assets/images/Send_active.svg';
-  static String noInternetConnection = 'assets/images/noConnectioncCoud.png';
-
+  static String appleBlack24dp = 'assets/image/apple_black_24dp.svg';
 
   //GIF
   static String noDataFoundGIF = 'assets/images/NoDataFound.gif';
+  static String signinBgGIF = 'assets/gif/cakecutblack.gif';
 
 }
