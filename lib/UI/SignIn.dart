@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sizzlingtaste/UI/DashBoard.dart';
 import 'package:sizzlingtaste/constants/AppImages.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
+import 'package:sizzlingtaste/controller.dart';
 import '../constants/AppColor.dart';
 import '../constants/AppFontWeight.dart';
 
@@ -13,6 +14,7 @@ class SignIn extends StatelessWidget {
    SignIn({Key? key}) : super(key: key);
 
    final teMobileNo = TextEditingController();
+   final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,8 @@ class SignIn extends StatelessWidget {
                          labelStyle: TextStyle(color: AppColor.colorPrimary),
                          labelText: AppStrings.phoneNo,
                          prefixText: ' ',
-                         suffixIcon: Icon(Icons.phone,color: AppColor.colorPrimary,)),
+                         suffixIcon: Icon(Icons.phone,color: AppColor.colorPrimary,)
+                     ),
                      style: TextStyle(color: AppColor.colorPrimary),
                      maxLength: 10,
                      autofocus: false,
