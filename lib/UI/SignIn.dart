@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sizzlingtaste/UI/DashBoard.dart';
 import 'package:sizzlingtaste/constants/AppImages.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
+import 'package:sizzlingtaste/controller.dart';
 import '../constants/AppColor.dart';
 import '../constants/AppFontWeight.dart';
 
@@ -13,6 +14,7 @@ class SignIn extends StatelessWidget {
    SignIn({Key? key}) : super(key: key);
 
    final teMobileNo = TextEditingController();
+   final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,6 @@ class SignIn extends StatelessWidget {
                      controller: teMobileNo,
                      // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
                      decoration: InputDecoration(
-
                          border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(70),
                              borderSide: BorderSide(color: Colors.white)),

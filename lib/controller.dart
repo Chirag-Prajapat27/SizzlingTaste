@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeController extends GetxController with GetSingleTickerProviderStateMixin{
 
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   void onInit(){
   super.onInit();
@@ -22,5 +25,35 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     sideMenuData.add(SideMenuDataModel("LogOut", Icons.logout));
      return sideMenuData;
   }
+
+  verifyPhoneNo(String $mobileNo,){
+    auth.verifyPhoneNumber(
+      phoneNumber: '+91 ' + $mobileNo,
+      timeout: Duration(seconds: 60),
+
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        await auth.signInWithCredential(credential);
+      },
+
+      codeSent: (String verificationId, int? resendToken) {
+        String smsCode = " ";
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+
+        auth.signInWithPhoneNumber($mobileNo);
+      },
+
+      verificationFailed: (FirebaseAuthException error) {
+        if(error.code == ''){
+          print("Phone NUmber is incorrect");
+        }
+      },
+
+      codeAutoRetrievalTimeout: (String verificationId) {
+
+      },
+
+    );
+  }
+
 
 }
