@@ -60,7 +60,7 @@ class SignIn extends StatelessWidget {
                      textInputAction: TextInputAction.done,
                      keyboardType: TextInputType.emailAddress),
 
-                InkWell(onTap: () => Utilities.showSnackBar(context, "hello guys"),
+                InkWell(onTap: () => Utilities.showSnackBar("Coming soon",message: 'Working on this functionality',),
                   child: Container(
                     height: 40,
                     child: Row(

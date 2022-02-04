@@ -11,40 +11,46 @@ import '../constants/AppStrings.dart';
 
 class Utilities {
 
-  static showSnackBar(BuildContext context, String title, {String? message = '',bool snackbarPositonBottom = true}) {
+  static showSnackBar(String title, {String? message = '',bool snackbarPositonBottom = true}) {
 
     Get.snackbar(title, message!,snackPosition: snackbarPositonBottom?SnackPosition.BOTTOM:SnackPosition.TOP);
 
   }
 
-  static showError(GlobalKey<ScaffoldState> scaffoldKey, String msg) {
-    ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(SnackBar(
-      content: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.error,
-                color: Colors.red,
-                size: 30,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                  child: Text(
-                msg,
-                style: TextStyle(color: AppColor.colorTheme, fontSize: 14),
-              )),
-            ],
-          ),
-        ),
-      ),
-      duration: Duration(seconds: 2),
-      backgroundColor: Colors.white,
-    ));
+  static showError(String title, {String? message = '',bool snackbarPositonBottom = true}) {
+
+    Get.snackbar(title, message!,snackPosition: snackbarPositonBottom?SnackPosition.BOTTOM:SnackPosition.TOP,
+    titleText: Text(title, style: TextStyle(color: AppColor.colorTheme, fontSize: 14)),
+    icon: Icon(Icons.error, color: Colors.red, size: 30)
+    );
+
+    // ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(SnackBar(
+    //   content: Container(
+    //     color: Colors.white,
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(8.0),
+    //       child: Row(
+    //         children: <Widget>[
+    //           Icon(
+    //             Icons.error,
+    //             color: Colors.red,
+    //             size: 30,
+    //           ),
+    //           SizedBox(
+    //             width: 8,
+    //           ),
+    //           Flexible(
+    //               child: Text(
+    //             msg,
+    //             style: TextStyle(color: AppColor.colorTheme, fontSize: 14),
+    //           )),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    //   duration: Duration(seconds: 2),
+    //   backgroundColor: Colors.white,
+    // ));
   }
 
   static showSuccessMessage(GlobalKey<ScaffoldState> scaffoldKey, String msg) {
