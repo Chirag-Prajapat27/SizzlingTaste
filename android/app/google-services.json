@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "297913589406",
+    "project_id": "sizzling-taste",
+    "storage_bucket": "sizzling-taste.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297913589406:android:ce0a75e6e331dfd0cd258f",
+        "android_client_info": {
+          "package_name": "com.sizzlingTaste.sizzlingtaste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297913589406-ovbu0b5k92qd0hvdfmc4bufded1qjl8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUzAA7w_MA_g6imYC2Nmdq8ozLD7kxhRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297913589406-ovbu0b5k92qd0hvdfmc4bufded1qjl8n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297913589406-s6uqqon9o4vskqlei1fa9jik88v58s5d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sizzlingTaste.sizzlingtaste"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
