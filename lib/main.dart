@@ -6,7 +6,8 @@ void main() {
 
   Widget _defaultWidget;
 
-  _defaultWidget =  const DashBoard();
+  _defaultWidget =  DashBoard();
 
   runApp(App(defaultWidgets: _defaultWidget));
+
 }
