@@ -44,15 +44,18 @@ class SignIn extends StatelessWidget {
                      controller: teMobileNo,
                      // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
                      decoration: InputDecoration(
+
                          border: OutlineInputBorder(
-                           borderRadius: BorderRadius.circular(20),
-                             borderSide: BorderSide(color: Colors.grey)),
+                           borderRadius: BorderRadius.circular(70),
+                             borderSide: BorderSide(color: Colors.white)),
+
                          hintText: AppStrings.hintPhoneNo,
                          hintStyle: TextStyle(color: AppColor.colorPrimary),
                          labelStyle: TextStyle(color: AppColor.colorPrimary),
                          labelText: AppStrings.phoneNo,
                          prefixText: ' ',
                          suffixIcon: Icon(Icons.phone,color: AppColor.colorPrimary,)),
+
                      style: TextStyle(color: AppColor.colorPrimary),
                      maxLength: 10,
                      autofocus: false,
