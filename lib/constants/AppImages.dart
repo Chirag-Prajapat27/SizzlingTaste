@@ -29,7 +29,7 @@ class AppImages {
   static String filter = 'assets/images/Filter.svg';
   static String send = 'assets/images/Send.svg';
   static String send_active = 'assets/images/Send_active.svg';
-  static String appleBlack24dp = 'assets/image/apple_black_24dp.svg';
+  static String appleBlack24dp = 'assets/images/apple_black_24dp.svg';
 
   //GIF
   static String noDataFoundGIF = 'assets/images/NoDataFound.gif';

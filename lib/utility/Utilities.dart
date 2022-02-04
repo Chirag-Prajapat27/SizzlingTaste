@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/AppColor.dart';
@@ -10,33 +11,10 @@ import '../constants/AppStrings.dart';
 
 class Utilities {
 
-  static showSnackBar(BuildContext context, String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-      content: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.error,
-                color: Colors.red,
-                size: 30,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                  child: Text(msg,
-                      style:
-                          TextStyle(color: AppColor.colorTheme, fontSize: 14))),
-            ],
-          ),
-        ),
-      ),
-      duration: Duration(seconds: 2),
-      backgroundColor: Colors.white,
-    ));
+  static showSnackBar(BuildContext context, String title, {String? message = '',bool snackbarPositonBottom = true}) {
+
+    Get.snackbar(title, message!,snackPosition: snackbarPositonBottom?SnackPosition.BOTTOM:SnackPosition.TOP);
+
   }
 
   static showError(GlobalKey<ScaffoldState> scaffoldKey, String msg) {
