@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizzlingtaste/UI/CreateAccountShop.dart';
+import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppImages.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/controller.dart';
