@@ -13,8 +13,9 @@ import '../utility/Utilities.dart';
 class SignIn extends StatelessWidget {
    SignIn({Key? key}) : super(key: key);
 
-   final teMobileNo = TextEditingController();
+
    final controller = Get.put(HomeController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +36,15 @@ class SignIn extends StatelessWidget {
 
               children: [
 
-                Text(AppStrings.welcomeHeadLine,style: Utilities.setTextStyle(AppFontWeight.header,
-                    AppFontWeight.bold,color: AppColor.colorPrimary),),
+                Text(AppStrings.welcomeHeadLine,
+                  style: Utilities.setTextStyle(AppFontWeight.header,AppFontWeight.bold,color: AppColor.colorPrimary),),
                 const SizedBox(height: 15),
-                Text(AppStrings.subWelcomeHeading,style: Utilities.setTextStyle(AppFontWeight.subTitleText,
-                    AppFontWeight.regular,color: AppColor.colorPrimary),),
+                Text(AppStrings.subWelcomeHeading,
+                  style: Utilities.setTextStyle(AppFontWeight.subTitleText,AppFontWeight.regular,color: AppColor.colorPrimary),),
                 const SizedBox(height: 20),
 
                 TextField(
-                     controller: teMobileNo,
+                     controller: controller.teMobileNo,
                      // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
                      decoration: InputDecoration(
                          border: OutlineInputBorder(
