@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:sizzlingtaste/constants/AppImages.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/controller.dart';
-
 import '../constants/AppColor.dart';
 import '../constants/AppFontWeight.dart';
+
 import '../utility/Utilities.dart';
 
 class SignIn extends StatelessWidget {
    SignIn({Key? key}) : super(key: key);
 
-   final teMobileNo = TextEditingController();
+
    final controller = Get.put(HomeController());
 
   @override
@@ -91,6 +91,8 @@ class SignIn extends StatelessWidget {
               ),
             ),
           )
+
+
         ],
       ),
     );

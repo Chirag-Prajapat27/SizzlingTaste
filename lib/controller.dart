@@ -9,10 +9,15 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final teMobileNo = TextEditingController();
+  RxString phoneNoText = "".obs;
 
 
   void onInit(){
   super.onInit();
+  teMobileNo.addListener(() {
+    phoneNoText.value = teMobileNo.text;
+  });
   staticData();
   }
 
