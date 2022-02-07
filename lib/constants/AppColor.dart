@@ -10,6 +10,7 @@ class AppColor {
   static const Color colorTheme = Color.fromRGBO(37, 38, 68, 1.0);
   static const Color colorDarkTheme = Color.fromRGBO(28, 29, 62, 1.0);
   static const Color colorGreen = Color.fromRGBO(0, 243, 70, 1.0);
+  static const Color colorBtnGreen = Color.fromRGBO(7, 217, 80, 1.0);
   static const Color colorPrimary = Color.fromRGBO(255, 255, 255, 1.0);
   static const Color colorGray = Color.fromRGBO(212, 212, 212, 1.0);
   static const Color colorBlack = Color.fromRGBO(0, 11, 20, 1.0);

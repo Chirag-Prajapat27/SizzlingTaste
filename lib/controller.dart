@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizzlingtaste/UI/CreateAccountShop.dart';
+import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -10,9 +12,20 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final teMobileNo = TextEditingController();
+  var teRestroName = TextEditingController();
+  var teEmail = TextEditingController();
+  var teAddress = TextEditingController();
+  var teLandmark = TextEditingController();
+  var teCity = TextEditingController();
+  var teState = TextEditingController();
+  var teCountry = TextEditingController();
+  var tePinCode = TextEditingController();
+
   RxString phoneNoText = "".obs;
+  var isUpdate = "".obs;
 
 
+  @override
   void onInit(){
   super.onInit();
   teMobileNo.addListener(() {
@@ -20,6 +33,21 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   });
   staticData();
   }
+
+  @override
+  void onClose(){
+    super.onClose();
+    teRestroName.dispose();
+    teAddress.dispose();
+    tePinCode.dispose();
+    teEmail .dispose();
+    teCity.dispose();
+    teCountry.dispose();
+    teLandmark.dispose();
+    teState.dispose();
+
+  }
+
 
 
  List <SideMenuDataModel> staticData(){
@@ -31,6 +59,17 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     sideMenuData.add(SideMenuDataModel("LogOut", Icons.logout));
      return sideMenuData;
   }
+
+  checkCreateAndUpdateScreen(RxBool isUpdateArg){
+    if(isUpdateArg == true ) {
+      isUpdate = RxString(AppStrings.updateAccount);
+          Get.to(CreateAccountShop());
+    } else{
+      RxString(AppStrings.createAccount);
+      Get.offAll(CreateAccountShop());
+    }
+  }
+
 
   verifyPhoneNo(String $mobileNo,){
     auth.verifyPhoneNumber(
