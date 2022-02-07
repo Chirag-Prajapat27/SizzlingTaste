@@ -7,6 +7,7 @@ import '../constants/AppColor.dart';
 import '../constants/AppFontWeight.dart';
 
 import '../utility/Utilities.dart';
+import 'DashBoard.dart';
 
 class SignIn extends StatelessWidget {
    SignIn({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class SignIn extends StatelessWidget {
                     Column(
                       children: [
                         TextField(
-                             controller: teMobileNo,
+                             controller: controller.teMobileNo,
                              // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
                              decoration: InputDecoration(
                                  counter: Spacer(),
@@ -68,7 +69,7 @@ class SignIn extends StatelessWidget {
                              keyboardType: TextInputType.emailAddress),
 
 
-                    InkWell(onTap: () => {},
+                    InkWell(onTap: () => Get.to(DashBoard()),
                       child: Container(
                         margin: const EdgeInsets.only(top: 20,bottom: 20),
                         height: 40,
@@ -91,8 +92,6 @@ class SignIn extends StatelessWidget {
               ),
             ),
           )
-
-
         ],
       ),
     );
