@@ -9,6 +9,7 @@ class AppStrings {
   static String hintPhoneNo = 'Please Enter Mobile No.';
   static String phoneNo = 'Mobile No.';
   static String signUpWithEmail = 'Sign up with Email';
+  static String signIn = 'SignIn';
   static String continueWithApple = 'Continue with Apple';
   static String alreadyHaveAccount = 'Already have account?';
   static String login ='Log in';

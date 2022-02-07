@@ -10,6 +10,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+
   void onInit(){
   super.onInit();
   staticData();
