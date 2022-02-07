@@ -7,6 +7,10 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizzlingtaste/constants/AppColor.dart';
 import 'package:sizzlingtaste/controller.dart';
+import 'package:sms_autofill/sms_autofill.dart';
+
+import '../constants/AppFontWeight.dart';
+import '../utility/Utilities.dart';
 
 
 class OtpScreen extends StatelessWidget {
@@ -35,9 +39,9 @@ class OtpScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: ListView(
               children: <Widget>[
-                SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                const SizedBox(height: 8),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     'Phone Number Verification',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
@@ -53,106 +57,133 @@ class OtpScreen extends StatelessWidget {
                         children: [
                           TextSpan(
                               text: controlle.phoneNoText.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15)),
                         ],
-                        style: TextStyle(color: Colors.black54, fontSize: 15)),
+                        style: const TextStyle(color: Colors.black54, fontSize: 15)),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Form(
-                  key: formKey,
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 30),
-                      child: PinCodeTextField(
-                        appContext: context,
-                        pastedTextStyle: TextStyle(
-                          color: Colors.green.shade600,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        length: 6,
-                        obscureText: false,
-                        obscuringCharacter: '*',
-                        animationType: AnimationType.fade,
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.box,
-                          borderRadius: BorderRadius.circular(5),
-                          fieldHeight: 60,
-                          fieldWidth: 50,
-                          activeFillColor:
-                          hasError ? AppColor.colorPrimary : Colors.white,
-                        ),
-                        cursorColor: Colors.black,
-                        animationDuration: Duration(milliseconds: 30),
-                        textStyle: TextStyle(fontSize: 20, height: 1.6),
-                        // backgroundColor: Colors.blue.shade50,
-                        // enableActiveFill: true,
-                        errorAnimationController: errorController,
-                        controller: textEditingController,
-                        keyboardType: TextInputType.number,
-                        // boxShadows: [
-                        //   BoxShadow(
-                        //     offset: Offset(0, 1),
-                        //     color: Colors.black12,
-                        //     blurRadius: 10,
-                        //   )
-                        // ],
-                        onCompleted: (v) {
-                          print("Completed");
-                        },
-                        // onTap: () {
-                        //   print("Pressed");
-                        // },
-                        onChanged: (value) {
-                          print(value);
-                          currentText = value.obs;
+                const SizedBox(height: 20),
 
-                        },
-                        beforeTextPaste: (text) {
-                          print("Allowing to paste $text");
-                          //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                          //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                          return true;
-                        },
-                      )),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: PinFieldAutoFill(
+                    controller: controlle.teOtpTextController,
+                    decoration: BoxLooseDecoration(
+                        gapSpace: 12,
+                        bgColorBuilder: PinListenColorBuilder(AppColor.colorPrimary, AppColor.colorUnderlineGray),
+                        textStyle: Utilities.setTextStyle(
+                            AppFontWeight.titleHeader, AppFontWeight.bold,
+                            color: AppColor.colorLightBlack),
+                        strokeWidth: 1.3,
+                        strokeColorBuilder: const FixedColorBuilder(AppColor.colorBlack)
+                    ),
+                    autoFocus: true,
+                    textInputAction: TextInputAction.done,
+                    // currentCode: otpCode != null ? otpCode : controlle.teOtpTextController.text,
+                    currentCode: controlle.otpCode.value ?? controlle.teOtpTextController.text,
+                    onCodeSubmitted: (code) {},
+                    onCodeChanged: (code) {
+                      code!.length == 6 ? otpVerify():FocusScope.of(context).requestFocus(FocusNode());
+
+                      // Obx(() {
+                      //   if (code!.length == 6) {
+                      //     otpVerify();
+                      //     FocusScope.of(context).requestFocus(FocusNode());
+                      //   }
+                      // });
+                    },
+                  ),
                 ),
+
+                // Form(
+                //   key: formKey,
+                //   child: Padding(
+                //       padding: const EdgeInsets.symmetric(
+                //           vertical: 8.0, horizontal: 30),
+                //       child: PinCodeTextField(
+                //         appContext: context,
+                //         pastedTextStyle: TextStyle(
+                //           color: Colors.green.shade600,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //         length: 6,
+                //         obscureText: false,
+                //         obscuringCharacter: '*',
+                //         animationType: AnimationType.fade,
+                //         pinTheme: PinTheme(
+                //           shape: PinCodeFieldShape.box,
+                //           borderRadius: BorderRadius.circular(5),
+                //           fieldHeight: 60,
+                //           fieldWidth: 50,
+                //           activeFillColor:
+                //           hasError ? AppColor.colorPrimary : Colors.white,
+                //         ),
+                //         cursorColor: Colors.black,
+                //         animationDuration: Duration(milliseconds: 30),
+                //         textStyle: TextStyle(fontSize: 20, height: 1.6),
+                //         // backgroundColor: Colors.blue.shade50,
+                //         // enableActiveFill: true,
+                //         errorAnimationController: errorController,
+                //         controller: textEditingController,
+                //         keyboardType: TextInputType.number,
+                //         // boxShadows: [
+                //         //   BoxShadow(
+                //         //     offset: Offset(0, 1),
+                //         //     color: Colors.black12,
+                //         //     blurRadius: 10,
+                //         //   )
+                //         // ],
+                //         onCompleted: (v) {
+                //           print("Completed");
+                //         },
+                //         // onTap: () {
+                //         //   print("Pressed");
+                //         // },
+                //         onChanged: (value) {
+                //           print(value);
+                //           currentText = value.obs;
+                //
+                //         },
+                //         beforeTextPaste: (text) {
+                //           print("Allowing to paste $text");
+                //           //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                //           //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                //           return true;
+                //         },
+                //       )),
+                // ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Text(
                     hasError ? "*Please fill up all the codes properly" : "",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.red,
                         fontSize: 12,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
                       text: "Didn't receive the code? ",
-                      style: TextStyle(color: Colors.black54, fontSize: 15),
+                      style: const TextStyle(color: Colors.black54, fontSize: 15),
                       children: [
                         TextSpan(
                             text: " RESEND",
                             recognizer: onTapRecognizer,
-                            style: TextStyle(
-                                color: Color(0xFF91D3B3),
+                            style: const TextStyle(
+                                color: const Color(0xFF91D3B3),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16))
                       ]),
                 ),
-                SizedBox(
-                  height: 14,
-                ),
+                const SizedBox(height: 14),
                 Container(
                   margin:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30),
@@ -175,7 +206,7 @@ class OtpScreen extends StatelessWidget {
                       child: Center(
                           child: Text(
                             "VERIFY".toUpperCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
@@ -183,26 +214,6 @@ class OtpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // SizedBox(
-                //   height: 16,
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: <Widget>[
-                //     ElevatedButton(
-                //       child: Text("Clear Code"),
-                //       onPressed: () {
-                //         textEditingController.clear();
-                //       },
-                //     ),
-                //     ElevatedButton(
-                //       child: Text("Set Text"),
-                //       onPressed: () {
-                //         textEditingController.text = "123456";
-                //       },
-                //     ),
-                //   ],
-                // )
               ],
             ),
           ),
@@ -210,4 +221,6 @@ class OtpScreen extends StatelessWidget {
       );
 
   }
+
+
 }

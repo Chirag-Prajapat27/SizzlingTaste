@@ -5,8 +5,9 @@ import 'package:sizzlingtaste/UI/CreateAccountShop.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
-class HomeController extends GetxController with GetSingleTickerProviderStateMixin{
+class HomeController extends GetxController with GetSingleTickerProviderStateMixin, CodeAutoFill{
 
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
 
@@ -20,9 +21,11 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   var teState = TextEditingController();
   var teCountry = TextEditingController();
   var tePinCode = TextEditingController();
+  var teOtpTextController = TextEditingController();
 
   RxString phoneNoText = "".obs;
   var isUpdate = "".obs;
+  var otpCode = "".obs;
 
 
   @override
@@ -48,7 +51,9 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   }
 
-
+  otpVerify() {
+    PhoneAuthCredential credential =PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode)
+  }
 
  List <SideMenuDataModel> staticData(){
     sideMenuData.add(SideMenuDataModel("Home", Icons.home_filled));
@@ -98,6 +103,12 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       },
 
     );
+  }
+
+  @override
+  void codeUpdated() {
+    otpCode = RxString(code!);
+    teOtpTextController.text = code!;
   }
 
 
