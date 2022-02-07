@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppImages.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/controller.dart';
@@ -52,7 +53,8 @@ class SignIn extends StatelessWidget {
                                  counter: Spacer(),
                                  border: OutlineInputBorder(
                                    borderRadius: BorderRadius.circular(70),
-                                     borderSide: const BorderSide(color: Colors.white)),
+                                     borderSide: const BorderSide(color: AppColor.colorPrimary),
+                                 ),
 
                                  focusColor: AppColor.colorBlack,
                                  hintText: AppStrings.hintPhoneNo,
@@ -69,7 +71,7 @@ class SignIn extends StatelessWidget {
                              keyboardType: TextInputType.emailAddress),
 
 
-                    InkWell(onTap: () => Get.to(DashBoard()),
+                    InkWell(onTap: () => Get.to(() => OtpScreen()),
                       child: Container(
                         margin: const EdgeInsets.only(top: 20,bottom: 20),
                         height: 40,
