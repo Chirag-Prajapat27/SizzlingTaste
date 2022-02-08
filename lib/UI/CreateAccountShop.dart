@@ -20,8 +20,7 @@ class CreateAccountShop extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
-     // Create a CollectionReference called users that references the firestore collection
-     CollectionReference users = FirebaseFirestore.instance.collection('Restaurant');
+
     return Scaffold(
       appBar: AppBar(title: Text("controller.isUpdate.value",style: Utilities.setTextStyle(
         AppFontWeight.subHeader, AppFontWeight.semiBold),)),
@@ -105,10 +104,18 @@ class CreateAccountShop extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 hintText: AppStrings.pinCode,
                 onChange: (text){}),
-
                   CustomButton(
                       buttonTitle: AppStrings.submit, onTapButton: (){
-
+                    controller.addRestaurantData(
+                      controller.teRestroName.text.toString(),
+                      controller.teEmail.text.toString(),
+                      controller.teAddress.text.toString(),
+                      controller.teLandmark.text.toString(),
+                      controller.teCity.text.toString(),
+                      controller.teState.text.toString(),
+                      controller.teCountry.text.toString(),
+                      controller.tePinCode.text.toString(),
+                        controller.sharedPrefRead("userMobile").toString());
                   })
               ],
         ),
