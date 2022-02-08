@@ -2,12 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sizzlingtaste/UI/CreateAccountShop.dart';
+import 'package:sizzlingtaste/UI/DashBoard.dart';
 import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:sizzlingtaste/utility/Utilities.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+
 
 class HomeController extends GetxController with GetSingleTickerProviderStateMixin, CodeAutoFill{
 
@@ -29,6 +32,8 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   var isUpdate = "".obs;
   var otpCode = "".obs;
   var verificationID = "".obs;
+
+  final userdata = GetStorage();
 
 
   @override
@@ -57,6 +62,16 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   }
 
+void sharedPrefWrite(String key,String value){
+    userdata.write(key, value);
+}
+
+void sharedPrefRemove(String key){
+    userdata.remove(key);
+}
+void sharedPrefEraseAllData(){
+    userdata.erase();
+}
 
  List <SideMenuDataModel> staticData(){
     sideMenuData.add(SideMenuDataModel("Home", Icons.home_filled));
@@ -74,7 +89,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
           Get.to(CreateAccountShop());
     } else{
       RxString(AppStrings.createAccount);
-      Get.offAll(CreateAccountShop());
+      Get.offAll(() => CreateAccountShop());
     }
   }
 
@@ -84,12 +99,15 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
       Utilities.showSnackBar(value.user!.phoneNumber.toString(),message: "Login Successfully Done");
+      sharedPrefWrite("userMobile", value.user!.phoneNumber.toString());
+      Get.to(() => DashBoard());
       print(value.user.toString());
     }).catchError((e) {
       if (e.message!.contains('network'))
         Utilities.showSnackBar(AppStrings.checkInternetConnection);
       else
-        Utilities.showSnackBar("Please fill correct OTP");
+        Utilities.showError("Please fill correct OTP");
+        // Utilities.showSnackBar("Please fill correct OTP");
     });
   }
 
@@ -106,7 +124,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       codeSent: (String verificationId, int? resendToken) {
         verificationID = RxString(verificationId);
         Utilities.showSnackBar("OTP sent Successfully");
-        Get.off(()=> OtpScreen());
+        Get.off(() => OtpScreen());
       },
 
       verificationFailed: (FirebaseAuthException error) {
