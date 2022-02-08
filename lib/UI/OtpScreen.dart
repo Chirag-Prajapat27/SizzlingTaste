@@ -28,6 +28,7 @@ class OtpScreen extends StatelessWidget {
   StreamController <ErrorAnimationType> errorController = StreamController<ErrorAnimationType>();
    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(

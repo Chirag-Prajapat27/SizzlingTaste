@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
+import 'package:sizzlingtaste/resources/CustomButton.dart';
 import 'package:sizzlingtaste/resources/CustomTextFiled.dart';
 
 import '../constants/AppFontWeight.dart';
@@ -22,87 +24,94 @@ class CreateAccountShop extends StatelessWidget {
         AppFontWeight.subHeader, AppFontWeight.semiBold),)),
 
         body: Container(
-          color: Colors.red,
           padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
-          child: Column(
-            children: [
-            CustomTextFiled(
-            textField: controller.teRestroName,
-            labelText: AppStrings.restaurantName,
-            hintText: AppStrings.restaurantName,
-            length: 140,
-            readOnly: false,
-            onChange: (text){}),
-
-            CustomTextFiled(
-            textField: controller.teEmail,
-            labelText: AppStrings.email,
-            readOnly: false,
-            length: 140,
-            hintText: AppStrings.email,
-            onChange: (text){}),
-
-            CustomTextFiled(
-            textField: controller.teAddress,
-            labelText: AppStrings.address,
-            hintText: AppStrings.address,
-            length: 140,
-            readOnly: false,
-            onChange: (text){}),
-
-            CustomTextFiled(
-            textField: controller.teLandmark,
-            labelText: AppStrings.landmark,
-            hintText: AppStrings.landmark,
-            readOnly: false,
-            length: 140,
-            onChange: (text){}),
-
-            Row(
-              children: [
+          child: SingleChildScrollView(
+            child: Expanded(
+              child: Column(
+                children: [
                 CustomTextFiled(
-                textField: controller.teCity,
-                labelText: AppStrings.city,
-                hintText: AppStrings.city,
+                textField: controller.teRestroName,
+                labelText: AppStrings.restaurantName,
+                hintText: AppStrings.restaurantName,
+                length: 140,
+                readOnly: false,
+                onChange: (text){}),
+
+                CustomTextFiled(
+                textField: controller.teEmail,
+                labelText: AppStrings.email,
+                readOnly: false,
+                length: 140,
+                hintText: AppStrings.email,
+                onChange: (text){}),
+
+                CustomTextFiled(
+                textField: controller.teAddress,
+                labelText: AppStrings.address,
+                hintText: AppStrings.address,
+                length: 140,
+                readOnly: false,
+                onChange: (text){}),
+
+                CustomTextFiled(
+                textField: controller.teLandmark,
+                labelText: AppStrings.landmark,
+                hintText: AppStrings.landmark,
                 readOnly: false,
                 length: 140,
                 onChange: (text){}),
 
-                const SizedBox(width: 10),
+                // Row(
+                //   children: [
+                    CustomTextFiled(
+                    textField: controller.teCity,
+                    labelText: AppStrings.city,
+                    hintText: AppStrings.city,
+                    readOnly: false,
+                    length: 140,
+                    onChange: (text){}),
+
+                    // const SizedBox(width: 10),
+
+                    CustomTextFiled(
+                    textField: controller.teState,
+                    labelText: AppStrings.state,
+                    hintText: AppStrings.state,
+                    readOnly: false,
+                    length: 140,
+                    onChange: (text){}),
+
+                //   ],
+                // ),
+
 
                 CustomTextFiled(
-                textField: controller.teState,
-                labelText: AppStrings.state,
-                hintText: AppStrings.state,
+                textField: controller.teCountry,
+                labelText: AppStrings.country,
+                hintText: AppStrings.country,
                 readOnly: false,
                 length: 140,
                 onChange: (text){}),
 
+                CustomTextFiled(
+                textField: controller.tePinCode,
+                labelText: AppStrings.pinCode,
+                readOnly: false,
+                length: 6,
+                textInputType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+                hintText: AppStrings.pinCode,
+                onChange: (text){}),
+
+                  CustomButton(
+                      buttonTitle: AppStrings.submit, onTapButton: (){
+
+                  })
               ],
-            ),
-
-
-            CustomTextFiled(
-            textField: controller.teCountry,
-            labelText: AppStrings.country,
-            hintText: AppStrings.country,
-            readOnly: false,
-            length: 140,
-            onChange: (text){}),
-
-            CustomTextFiled(
-            textField: controller.tePinCode,
-            labelText: AppStrings.pinCode,
-            readOnly: false,
-            length: 140,
-            hintText: AppStrings.pinCode,
-            onChange: (text){}),
-
-
-            ],
-    ),
         ),
-
+            ),
+          ),
+      ),
     );
   }
 

@@ -11,7 +11,6 @@ import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:sizzlingtaste/utility/Utilities.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-
 class HomeController extends GetxController with GetSingleTickerProviderStateMixin, CodeAutoFill{
 
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
@@ -108,11 +107,11 @@ void sharedPrefEraseAllData(){
       Get.to(() => DashBoard());
       print(value.user.toString());
     }).catchError((e) {
-      if (e.message!.contains('network'))
+      if (e.message!.contains('network')) {
         Utilities.showSnackBar(AppStrings.checkInternetConnection);
-      else
+      } else {
         Utilities.showError("Please fill correct OTP");
-        // Utilities.showSnackBar("Please fill correct OTP");
+      }
     });
   }
 
@@ -136,14 +135,17 @@ void sharedPrefEraseAllData(){
         if(error.code == ''){
           print("Phone Number is incorrect");
         }
-        if(error.code == 'invalid-phone-number')
+        if(error.code == 'invalid-phone-number') {
           Utilities.showError('The provided phone number is not valid.',message: "Please fill correct mobile no.");
+        }
 
-        if(error.code == 'too-many-requests')
+        if(error.code == 'too-many-requests') {
           Utilities.showError('Account is locked for 24 hours.',message: "Try again.");
+        }
 
-        if (error.message!.contains('network'))
+        if (error.message!.contains('network')) {
           Utilities.showSnackBar('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
+        }
 
       },
 

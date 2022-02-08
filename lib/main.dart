@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizzlingtaste/App.dart';
+import 'package:sizzlingtaste/UI/CreateAccountShop.dart';
 import 'package:sizzlingtaste/UI/DashBoard.dart';
 import 'package:sizzlingtaste/UI/SignIn.dart';
 
