@@ -4,6 +4,7 @@ const String rupeesSymbol = '₹';
 
 class AppStrings {
   //Static message of APP
+  static String submit = 'submit';
   static String continuie = 'Continue';
   static String next = 'Next';
   static String hintPhoneNo = 'Please Enter Mobile No.';

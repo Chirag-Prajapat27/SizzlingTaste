@@ -104,7 +104,7 @@ class _CustomTextFiledState extends State<CustomTextFiled> {
                   AppFontWeight.titleText, AppFontWeight.regular, // was size of 10 changed to 12
                   color: widget.textField.text.isEmpty
                       ? AppColor.colorHint
-                      : widget.readOnly!?AppColor.colorHint:AppColor.colorPurple),
+                      : widget.readOnly!?AppColor.colorHint:AppColor.colorLightBlack),
               hintText: widget.hintText,
               hintStyle: Utilities.setTextStyle(
                   AppFontWeight.subTitleText, AppFontWeight.semiBold,
@@ -113,7 +113,7 @@ class _CustomTextFiledState extends State<CustomTextFiled> {
                 borderSide: BorderSide(color: AppColor.colorUnderlineGray),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColor.colorUnderlineGray),
+                borderSide: BorderSide(color: AppColor.colorGray),
               ),
               counterText: '',
             ),

@@ -83,13 +83,15 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
         verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
 
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+      Get.offAll(()=> CreateAccountShop());
       Utilities.showSnackBar(value.user!.phoneNumber.toString(),message: "Login Successfully Done");
       print(value.user.toString());
     }).catchError((e) {
-      if (e.message!.contains('network'))
+      if (e.message!.contains('network')) {
         Utilities.showSnackBar(AppStrings.checkInternetConnection);
-      else
-        Utilities.showSnackBar("Please fill correct OTP");
+      } else {
+        Utilities.showError("Please fill correct OTP");
+      }
     });
   }
 
@@ -113,14 +115,17 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
         if(error.code == ''){
           print("Phone Number is incorrect");
         }
-        if(error.code == 'invalid-phone-number')
+        if(error.code == 'invalid-phone-number') {
           Utilities.showError('The provided phone number is not valid.',message: "Please fill correct mobile no.");
+        }
 
-        if(error.code == 'too-many-requests')
+        if(error.code == 'too-many-requests') {
           Utilities.showError('Account is locked for 24 hours.',message: "Try again.");
+        }
 
-        if (error.message!.contains('network'))
+        if (error.message!.contains('network')) {
           Utilities.showSnackBar('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
+        }
 
       },
 

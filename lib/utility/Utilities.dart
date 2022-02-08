@@ -19,7 +19,7 @@ class Utilities {
 
   static showError(String title, {String? message = 'empty',bool snackbarPositonBottom = true}) {
 
-    Get.snackbar(title, message!,snackPosition: snackbarPositonBottom==true?SnackPosition.BOTTOM:SnackPosition.TOP,
+    Get.snackbar(title, message!,snackPosition: snackbarPositonBottom?SnackPosition.BOTTOM:SnackPosition.TOP,
     borderColor: AppColor.colorError,
     titleText: Text(title, style: TextStyle(color: AppColor.colorTheme, fontSize: 14)),
     icon: Icon(Icons.error, color: Colors.red, size: 30)
