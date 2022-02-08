@@ -104,8 +104,12 @@ void sharedPrefEraseAllData(){
         verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
 
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+
       Utilities.showSnackBar(value.user!.phoneNumber.toString(),message: "Login Successfully Done");
+
       sharedPrefWrite("userMobile", value.user!.phoneNumber.toString());
+
+
       Get.to(() => DashBoard());
       print(value.user.toString());
     }).catchError((e) {
@@ -185,7 +189,6 @@ void sharedPrefEraseAllData(){
     otpCode = RxString(code!);
     teOtpTextController.text = code!;
   }
-
 
 
 }

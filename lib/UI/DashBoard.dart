@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizzlingtaste/UI/SignIn.dart';
 import 'package:sizzlingtaste/constants/AppColor.dart';
 import 'package:sizzlingtaste/constants/AppFontWeight.dart';
 import 'package:sizzlingtaste/controller.dart';
@@ -33,11 +34,6 @@ class DashBoard extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: controllerData.sideMenuData.length,
                       itemBuilder: (context, index) {
-                        InkWell(
-                          onTap: (){
-                            controllerData.sharedPrefEraseAllData();
-                          },
-                        );
                         return sideMenuView(index, context);
                       },
                     ),
@@ -54,6 +50,18 @@ class DashBoard extends StatelessWidget {
       onTap: () {
         Get.snackbar("You Clicked ${controllerData.sideMenuData[index].title}",
             " Eat It");
+        switch(controllerData.sideMenuData[index].title) {
+          case "LogOut":
+            {
+              controllerData.sharedPrefEraseAllData();
+              Get.offAll(() => SignIn());
+            }
+            break;
+          case "Home":
+            {
+              Get.close(0);
+            }
+        }
       },
       child: Container(
         height: 50,

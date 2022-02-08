@@ -13,16 +13,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  Widget _defaultWidget;
+  Widget? _defaultWidget;
 
   final storageData = GetStorage();
-  var userMobile = storageData.read("userMobile");
+  if(_defaultWidget != null){
+    var userMobile = storageData.read("userMobile");
 
-  if(userMobile != ""){
-    _defaultWidget = SignIn();
-  }else {
-    _defaultWidget = DashBoard();
+    if(userMobile != ""){
+      _defaultWidget = DashBoard();
+    }else {
+      _defaultWidget = SignIn();
+    }
   }
+
+
+
 
   // _defaultWidget =  DashBoard();
   // _defaultWidget =  SignIn();
