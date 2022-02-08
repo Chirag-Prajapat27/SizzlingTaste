@@ -65,9 +65,8 @@ void sharedPrefWrite(String key,String value){
     userdata.write(key, value);
 }
 
-void sharedPrefRead(String key){
-    var saveNumber = userdata.read(key);
-  return saveNumber;
+String sharedPrefRead(String key){
+   return userdata.read(key);
 }
 
 void sharedPrefRemove(String key){
@@ -102,8 +101,12 @@ void sharedPrefEraseAllData(){
         verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
 
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+
       Utilities.showSnackBar(value.user!.phoneNumber.toString(),message: "Login Successfully Done");
+
       sharedPrefWrite("userMobile", value.user!.phoneNumber.toString());
+
+
       Get.to(() => DashBoard());
       print(value.user.toString());
     }).catchError((e) {
