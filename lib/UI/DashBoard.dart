@@ -6,7 +6,8 @@ import 'package:sizzlingtaste/controller.dart';
 
 class DashBoard extends StatelessWidget {
   DashBoard({Key? key}) : super(key: key);
-  final controllerData = Get.put(HomeController());
+
+    final controllerData = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,11 @@ class DashBoard extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: controllerData.sideMenuData.length,
                       itemBuilder: (context, index) {
+                        InkWell(
+                          onTap: (){
+                            controllerData.sharedPrefEraseAllData();
+                          },
+                        );
                         return sideMenuView(index, context);
                       },
                     ),
@@ -59,7 +65,8 @@ class DashBoard extends StatelessWidget {
             Icon(controllerData.sideMenuData[index].icons, size: 26),
             SizedBox(width: 25),
             Text(controllerData.sideMenuData[index].title.toString(),
-                style: TextStyle(fontSize: AppFontWeight.titleText)),
+                style: TextStyle(fontSize: AppFontWeight.titleText)
+            ),
           ],
         ),
       ),

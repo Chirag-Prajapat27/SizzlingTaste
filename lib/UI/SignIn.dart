@@ -28,65 +28,67 @@ class SignIn extends StatelessWidget {
 
           Padding(
             padding:  const EdgeInsets.symmetric(horizontal: 16,vertical: 25),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 50),
-                  Text(AppStrings.welcomeHeadLine,style: Utilities.setTextStyle(AppFontWeight.header,
-                      AppFontWeight.bold,color: AppColor.colorPrimary),),
-                  const SizedBox(height: 15),
-                  Text(AppStrings.subWelcomeHeading,style: Utilities.setTextStyle(AppFontWeight.subTitleText,
-                      AppFontWeight.regular,color: AppColor.colorPrimary),),
-                  const SizedBox(height: 100),
+            child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50),
+                    Text(AppStrings.welcomeHeadLine,style: Utilities.setTextStyle(AppFontWeight.header,
+                        AppFontWeight.bold,color: AppColor.colorPrimary),),
+                    const SizedBox(height: 15),
+                    Text(AppStrings.subWelcomeHeading,style: Utilities.setTextStyle(AppFontWeight.subTitleText,
+                        AppFontWeight.regular,color: AppColor.colorPrimary),),
+                    const SizedBox(height: 100),
 
-                  SizedBox(height: 80,
-                    child: TextField(
-                         controller: controller.teMobileNo,
-                         // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
-                         decoration: InputDecoration(
-                             counter: Spacer(),
-                             border: OutlineInputBorder(
-                               borderRadius: BorderRadius.circular(70),
-                                 borderSide: const BorderSide(color: Colors.white)),
-                             focusColor: AppColor.colorBlack,
-                             hintText: AppStrings.hintPhoneNo,
-                             hintStyle: const TextStyle(color: AppColor.colorPrimary),
-                             labelStyle: const TextStyle(color: AppColor.colorPrimary),
-                             labelText: AppStrings.phoneNo,
-                             helperText: "",
-                             helperStyle: Utilities.setTextStyle(AppFontWeight.titleText,
-                                 AppFontWeight.regular,color: AppColor.colorError),
-                             prefixText: ' ',
-                             suffixIcon: const Icon(Icons.phone,color: AppColor.colorPrimary,)),
-                        style: const TextStyle(color: AppColor.colorPrimary),
-                         maxLength: 10,
-                         autofocus: false,
-                         obscureText: false,
-                         textInputAction: TextInputAction.done,
-                         keyboardType: TextInputType.number),
-                  ),
-
-
-                  InkWell(onTap: () => controller.verifyPhoneNo(controller.teMobileNo.text),
-                    child: Container(
-                  margin: const EdgeInsets.only(top: 40,bottom: 20),
-                  height: 40,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget> [
-                      Text(AppStrings.signIn,style: Utilities.setTextStyle(AppFontWeight.titleText,
-                          AppFontWeight.regular,color: AppColor.colorPrimary),),
-                    ],
-                  ),
-                  decoration: const BoxDecoration(borderRadius: const BorderRadius.all(const Radius.circular(20))
-                    ,color: Colors.lightGreenAccent),
+                    SizedBox(height: 80,
+                      child: TextField(
+                           controller: controller.teMobileNo,
+                           // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
+                           decoration: InputDecoration(
+                               // counter: Spacer(),
+                               border: OutlineInputBorder(
+                                 borderRadius: BorderRadius.circular(70),
+                                   borderSide: const BorderSide(color: Colors.white)),
+                               focusColor: AppColor.colorBlack,
+                               hintText: AppStrings.hintPhoneNo,
+                               hintStyle: const TextStyle(color: AppColor.colorPrimary),
+                               labelStyle: const TextStyle(color: AppColor.colorPrimary),
+                               labelText: AppStrings.phoneNo,
+                               helperText: "",
+                               helperStyle: Utilities.setTextStyle(AppFontWeight.titleText,
+                                   AppFontWeight.regular,color: AppColor.colorError),
+                               prefixText: ' ',
+                               suffixIcon: const Icon(Icons.phone,color: AppColor.colorPrimary,)),
+                          style: const TextStyle(color: AppColor.colorPrimary),
+                           maxLength: 10,
+                           autofocus: false,
+                           obscureText: false,
+                           textInputAction: TextInputAction.done,
+                           keyboardType: TextInputType.number),
                     ),
-                  ),
-                ],
+
+
+                    InkWell(onTap: () => controller.verifyPhoneNo(controller.teMobileNo.text),
+                      child: Container(
+                    margin: const EdgeInsets.only(top: 40,bottom: 20),
+                    height: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget> [
+                        Text(AppStrings.signIn,style: Utilities.setTextStyle(AppFontWeight.titleText,
+                            AppFontWeight.regular,color: AppColor.colorPrimary),),
+                      ],
+                    ),
+                    decoration: const BoxDecoration(borderRadius: const BorderRadius.all(const Radius.circular(20))
+                      ,color: Colors.lightGreenAccent),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )

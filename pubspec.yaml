@@ -38,7 +38,7 @@ dependencies:
   intl: ^0.17.0
   google_fonts: ^2.1.0
   device_info: any
-  shared_preferences: any
+  get_storage: ^2.0.3
   url_launcher: any
   flutter_svg: ^1.0.3
   image_cropper: ^1.4.1
