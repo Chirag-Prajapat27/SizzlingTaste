@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +20,8 @@ class CreateAccountShop extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
+     // Create a CollectionReference called users that references the firestore collection
+     CollectionReference users = FirebaseFirestore.instance.collection('Restaurant');
     return Scaffold(
       appBar: AppBar(title: Text("controller.isUpdate.value",style: Utilities.setTextStyle(
         AppFontWeight.subHeader, AppFontWeight.semiBold),)),

@@ -65,9 +65,8 @@ void sharedPrefWrite(String key,String value){
     userdata.write(key, value);
 }
 
-void sharedPrefRead(String key){
-    var saveNumber = userdata.read(key);
-  return saveNumber;
+String sharedPrefRead(String key){
+    return userdata.read(key);
 }
 
 void sharedPrefRemove(String key){
@@ -77,6 +76,8 @@ void sharedPrefEraseAllData(){
     userdata.erase();
 }
 
+
+//side menuData list
  List <SideMenuDataModel> staticData(){
     sideMenuData.add(SideMenuDataModel("Home", Icons.home_filled));
     sideMenuData.add(SideMenuDataModel("Categories", Icons.category));
@@ -97,6 +98,7 @@ void sharedPrefEraseAllData(){
     }
   }
 
+  // for verify OTP and user in firebase auth.
   otpVerify() async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
@@ -115,6 +117,7 @@ void sharedPrefEraseAllData(){
     });
   }
 
+  // For phone authentication and sent OTP
   verifyPhoneNo(String mobileNo){
 
     auth.verifyPhoneNumber(
@@ -156,11 +159,33 @@ void sharedPrefEraseAllData(){
     );
   }
 
+  bool checkBlankTextField(){
+    var verify = true;
+    if(teRestroName.text.trim().toString().isEmpty) {
+      verify = false;
+    } else if(teAddress.text.trim().toString().isEmpty) {
+      verify = false;
+    } else if(teEmail.text.trim().toString().isEmpty) {
+      verify = false;
+    } else if(teCity.text.trim().toString().isEmpty) {
+      verify = false;
+    } else if(teState.text.trim().toString().isEmpty) {
+      verify = false;
+    } else if(teCountry.text.trim().toString().isEmpty) {
+      verify = false;
+    } else {
+      verify = false;
+    }
+    return verify;
+  }
+
+  //default function for autofill otp
   @override
   void codeUpdated() {
     otpCode = RxString(code!);
     teOtpTextController.text = code!;
   }
+
 
 
 }

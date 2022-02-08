@@ -22,9 +22,9 @@ class DashBoard extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height / 3,
                     width: MediaQuery.of(context).size.width,
-                    child: const DrawerHeader(
+                    child: DrawerHeader(
                       decoration: BoxDecoration(color: AppColor.colorError),
-                      child: Text("Hi Mr ${controllerData.sharedPrefRead("userMobile")}"),
+                      child: Text("Hi Mr ${controllerData.sharedPrefRead("userMobile").toString()}"),
                     ),
                   ),
                   Expanded(
