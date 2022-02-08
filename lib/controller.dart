@@ -83,7 +83,8 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
         verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
 
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
-      Utilities.showSnackBar(value.user.toString());
+      Utilities.showSnackBar(value.user!.phoneNumber.toString(),message: "Login Successfully Done");
+      print(value.user.toString());
     }).catchError((e) {
       if (e.message!.contains('network'))
         Utilities.showSnackBar(AppStrings.checkInternetConnection);
@@ -105,7 +106,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       codeSent: (String verificationId, int? resendToken) {
         verificationID = RxString(verificationId);
         Utilities.showSnackBar("OTP sent Successfully");
-        Get.off(OtpScreen());
+        Get.off(()=> OtpScreen());
       },
 
       verificationFailed: (FirebaseAuthException error) {
@@ -113,13 +114,13 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
           print("Phone Number is incorrect");
         }
         if(error.code == 'invalid-phone-number')
-          Utilities.showError('The provided phone number is not valid.');
+          Utilities.showError('The provided phone number is not valid.',message: "Please fill correct mobile no.");
 
         if(error.code == 'too-many-requests')
-          Utilities.showError('Account is locked for 24 hours.');
+          Utilities.showError('Account is locked for 24 hours.',message: "Try again.");
 
         if (error.message!.contains('network'))
-          Utilities.showSnackBar('Please check your internet connection and try again');
+          Utilities.showSnackBar('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
 
       },
 

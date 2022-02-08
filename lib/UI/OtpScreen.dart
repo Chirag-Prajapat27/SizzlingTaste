@@ -70,6 +70,7 @@ class OtpScreen extends StatelessWidget {
 
                 Padding(
                   padding: const EdgeInsets.all(16.0),
+
                   child: PinFieldAutoFill(
                     controller: controlle.teOtpTextController,
                     decoration: BoxLooseDecoration(
@@ -87,14 +88,13 @@ class OtpScreen extends StatelessWidget {
                     // currentCode: controlle.otpCode.value ?? controlle.teOtpTextController.text,
                     onCodeSubmitted: (code) {},
                     onCodeChanged: (code) {
-                      code!.length == 6 ? controlle.otpVerify():FocusScope.of(context).requestFocus(FocusNode());
+                      // code!.length == 6 ? controlle.otpVerify():FocusScope.of(context).requestFocus(FocusNode());
+                        if (code!.length == 6) {
+                          controlle.otpVerify();
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        }
 
-                      // Obx(() {
-                      //   if (code!.length == 6) {
-                      //     otpVerify();
-                      //     FocusScope.of(context).requestFocus(FocusNode());
-                      //   }
-                      // });
+
                     },
                   ),
                 ),
@@ -191,17 +191,18 @@ class OtpScreen extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: () {
-                        formKey.currentState!.validate();
-                        // conditions for validating
-                        if (currentText.value.length != 6 || currentText != "towtow") {
-                          errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
-                          hasError = true;
-
-                        } else {
-                          hasError = false;
-                          scaffoldKey.currentState;
-                          Get.snackbar("Congratulations", "");
-                        }
+                        controlle.otpVerify();
+                        // formKey.currentState!.validate();
+                        // // conditions for validating
+                        // if (currentText.value.length != 6 || currentText != "towtow") {
+                        //   errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
+                        //   hasError = true;
+                        //
+                        // } else {
+                        //   hasError = false;
+                        //   scaffoldKey.currentState;
+                        //   Get.snackbar("Congratulations", "");
+                        // }
                       },
                       child: Center(
                           child: Text(

@@ -66,7 +66,7 @@ class SignIn extends StatelessWidget {
                          autofocus: false,
                          obscureText: false,
                          textInputAction: TextInputAction.done,
-                         keyboardType: TextInputType.emailAddress),
+                         keyboardType: TextInputType.number),
                   ),
 
 
