@@ -66,6 +66,11 @@ void sharedPrefWrite(String key,String value){
     userdata.write(key, value);
 }
 
+void sharedPrefRead(String key){
+    var saveNumber = userdata.read(key);
+  return saveNumber;
+}
+
 void sharedPrefRemove(String key){
     userdata.remove(key);
 }

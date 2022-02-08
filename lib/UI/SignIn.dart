@@ -48,7 +48,7 @@ class SignIn extends StatelessWidget {
                            controller: controller.teMobileNo,
                            // decoration: new InputDecoration.collapsed(hintText: 'Email'),0
                            decoration: InputDecoration(
-                               // counter: Spacer(),
+                               counter: Spacer(),
                                border: OutlineInputBorder(
                                  borderRadius: BorderRadius.circular(70),
                                    borderSide: const BorderSide(color: Colors.white)),
