@@ -25,6 +25,7 @@ class AppStrings {
   static String state = 'state';
   static String country = 'Country';
   static String pinCode = 'Pin Code';
+  static String checkInternetConnection = 'Please Check Internet Connection';
 
 
 

@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizzlingtaste/UI/CreateAccountShop.dart';
+import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sizzlingtaste/utility/Utilities.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class HomeController extends GetxController with GetSingleTickerProviderStateMixin, CodeAutoFill{
@@ -26,11 +28,15 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   RxString phoneNoText = "".obs;
   var isUpdate = "".obs;
   var otpCode = "".obs;
+  var verificationID = "".obs;
 
 
   @override
   void onInit(){
   super.onInit();
+  teOtpTextController.addListener(() {
+    otpCode = RxString(teOtpTextController.text);
+  });
   teMobileNo.addListener(() {
     phoneNoText.value = teMobileNo.text;
   });
@@ -51,9 +57,6 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   }
 
-  otpVerify() {
-    PhoneAuthCredential credential =PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode)
-  }
 
  List <SideMenuDataModel> staticData(){
     sideMenuData.add(SideMenuDataModel("Home", Icons.home_filled));
@@ -75,31 +78,53 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     }
   }
 
+  otpVerify() async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
 
-  verifyPhoneNo(String $mobileNo,){
+    await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+      Utilities.showSnackBar(value.user.toString());
+    }).catchError((e) {
+      if (e.message!.contains('network'))
+        Utilities.showSnackBar(AppStrings.checkInternetConnection);
+      else
+        Utilities.showSnackBar("Please fill correct OTP");
+    });
+  }
+
+  verifyPhoneNo(String mobileNo){
+
     auth.verifyPhoneNumber(
-      phoneNumber: '+91 ' + $mobileNo,
-      timeout: Duration(seconds: 60),
+      phoneNumber: '+91 '+mobileNo,
+      timeout: Duration(seconds: 90),
 
       verificationCompleted: (PhoneAuthCredential credential) async {
-        await auth.signInWithCredential(credential);
+         auth.signInWithCredential(credential);
       },
 
       codeSent: (String verificationId, int? resendToken) {
-        String smsCode = " ";
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
-
-        auth.signInWithPhoneNumber($mobileNo);
+        verificationID = RxString(verificationId);
+        Utilities.showSnackBar("OTP sent Successfully");
+        Get.off(OtpScreen());
       },
 
       verificationFailed: (FirebaseAuthException error) {
         if(error.code == ''){
-          print("Phone NUmber is incorrect");
+          print("Phone Number is incorrect");
         }
+        if(error.code == 'invalid-phone-number')
+          Utilities.showError('The provided phone number is not valid.');
+
+        if(error.code == 'too-many-requests')
+          Utilities.showError('Account is locked for 24 hours.');
+
+        if (error.message!.contains('network'))
+          Utilities.showSnackBar('Please check your internet connection and try again');
+
       },
 
       codeAutoRetrievalTimeout: (String verificationId) {
-
+        // Auto-resolution timed out...
       },
 
     );

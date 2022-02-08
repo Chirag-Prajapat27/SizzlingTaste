@@ -83,11 +83,11 @@ class OtpScreen extends StatelessWidget {
                     ),
                     autoFocus: true,
                     textInputAction: TextInputAction.done,
-                    // currentCode: otpCode != null ? otpCode : controlle.teOtpTextController.text,
-                    currentCode: controlle.otpCode.value ?? controlle.teOtpTextController.text,
+                    currentCode: controlle.otpCode.value != null ? controlle.otpCode.value : controlle.teOtpTextController.text.toString().trim(),
+                    // currentCode: controlle.otpCode.value ?? controlle.teOtpTextController.text,
                     onCodeSubmitted: (code) {},
                     onCodeChanged: (code) {
-                      code!.length == 6 ? otpVerify():FocusScope.of(context).requestFocus(FocusNode());
+                      code!.length == 6 ? controlle.otpVerify():FocusScope.of(context).requestFocus(FocusNode());
 
                       // Obx(() {
                       //   if (code!.length == 6) {

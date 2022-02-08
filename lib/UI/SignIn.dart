@@ -70,7 +70,7 @@ class SignIn extends StatelessWidget {
                   ),
 
 
-                  InkWell(onTap: () => Get.to(CreateAccountShop()),
+                  InkWell(onTap: () => controller.verifyPhoneNo(controller.teMobileNo.text),
                     child: Container(
                   margin: const EdgeInsets.only(top: 40,bottom: 20),
                   height: 40,
