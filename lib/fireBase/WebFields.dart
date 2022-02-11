@@ -18,6 +18,7 @@ class WebFields {
   static const String LOCATION = "location";
   static const String ADDRESS = "address";
   static const String DELIVERY_CHARGE = "deliverycharge";
+  static const String MOBILE = "mobile";
 
   static const String EMAIL = "email";
 

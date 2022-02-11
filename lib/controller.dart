@@ -12,6 +12,8 @@ import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/fireBase/WebFields.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
+import 'package:sizzlingtaste/model/staticData.dart';
+import 'package:sizzlingtaste/model/trendingProductModel.dart';
 import 'package:sizzlingtaste/utility/Utilities.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
@@ -20,6 +22,8 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
   // Create a CollectionReference called users that references the firestore collection
   CollectionReference users = FirebaseFirestore.instance.collection('Restaurant');
+
+  List <String> errorMessageList = ['','','','','','','','',''];
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final teMobileNo = TextEditingController();
@@ -34,16 +38,19 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   var teOtpTextController = TextEditingController();
 
   RxString phoneNoText = "".obs;
-  var isUpdate = "".obs;
+  // var isUpdate = "".obs;
+  RxBool? isUpdate;
   var otpCode = "".obs;
   var verificationID = "".obs;
 
   late var userdata = GetStorage();
+  List<TrendingProductModel> trendingProducts = [];
 
 
   @override
   void onInit(){
   super.onInit();
+  trendingProducts = getTrendingProducts();
   userdata = GetStorage();
   teOtpTextController.addListener(() {
     otpCode = RxString(teOtpTextController.text);
@@ -102,7 +109,7 @@ void sharedPrefEraseAllData(){
 
   checkCreateAndUpdateScreen(RxBool isUpdateArg){
     if(isUpdateArg == true ) {
-      isUpdate = RxString(AppStrings.updateAccount);
+      isUpdate = RxString(AppStrings.updateAccount) as RxBool?;
           Get.to(CreateAccountShop());
     } else{
       RxString(AppStrings.createAccount);
@@ -122,7 +129,7 @@ void sharedPrefEraseAllData(){
       sharedPrefWrite("userMobile", value.user!.phoneNumber.toString());
 
 
-      Get.to(() => DashBoard());
+      Get.to(() => CreateAccountShop());
       print(value.user.toString());
     }).catchError((e) {
       if (e.message!.contains('network')) {
@@ -175,30 +182,72 @@ void sharedPrefEraseAllData(){
     );
   }
 
-  bool checkBlankTextField(){
-    var verify = true;
-    if(teRestroName.text.trim().toString().isEmpty) {
-      verify = false;
-    } else if(teAddress.text.trim().toString().isEmpty) {
-      verify = false;
-    } else if(teEmail.text.trim().toString().isEmpty) {
-      verify = false;
-    } else if(teCity.text.trim().toString().isEmpty) {
-      verify = false;
-    } else if(teState.text.trim().toString().isEmpty) {
-      verify = false;
-    } else if(teCountry.text.trim().toString().isEmpty) {
-      verify = false;
-    } else {
-      verify = false;
+  bool isValidate() {
+    bool verify = true;
+    for (int v = 0; v < errorMessageList.length; v++) {
+      if (v == 0) {
+        if (teRestroName.text.toString().trim().isEmpty) {
+          errorMessageList[0] = "Please Enter Restaurant Name";
+          verify = false;
+        } else {
+          errorMessageList[0] = "";
+        }
+      } else if (v == 1) {
+        if (teAddress.text.toString().trim().isEmpty) {
+          errorMessageList[1] = "Please enter your address";
+          verify = false;
+        } else {
+          errorMessageList[1] = "";
+        }
+      } else if (v == 2) {
+        if (teEmail.text.toString().trim().isEmpty) {
+          errorMessageList[2] = "Please enter eMail";
+          verify = false;
+        } else {
+          errorMessageList[2] = "";
+        }
+      } else if (v == 3) {
+        if (teCity.text.toString().trim().isEmpty) {
+          errorMessageList[3] = "Please enter your city";
+          verify = false;
+        } else {
+          errorMessageList[3] = "";
+        }
+      } else if (v == 4) {
+        if (teState.text.toString().trim().isEmpty) {
+          errorMessageList[4] = "Please enter your state";
+          verify = false;
+        } else {
+          errorMessageList[4] = "";
+        }
+      } else if (v == 5) {
+        if (teCountry.text.toString().trim().isEmpty) {
+          errorMessageList[5] = "Please enter your Country";
+          verify = false;
+        } else {
+          errorMessageList[5] = "";
+        }
+      } else if (v == 6) {
+        if (teLandmark.text.toString().trim().isEmpty) {
+          errorMessageList[6] = "Please enter your Country";
+          verify = false;
+        } else {
+          errorMessageList[6] = "";
+        }
+      } else if (v == 7) {
+        if (tePinCode.text.toString().trim().isEmpty) {
+          errorMessageList[7] = "Please enter your Country";
+          verify = false;
+        } else {
+          errorMessageList[7] = "";
+        }
+      }
     }
     return verify;
   }
 
-
   // addRestaurantData(HashMap<String, Object> data){
-  addRestaurantData(String restauranteName,String email,String address,
-      String landmark,String city,String state,String country,String pinCode,String mobileNo){
+  addRestaurantData(String restauranteName,String email,String address,String landmark,String city,String state,String country,String pinCode,String mobileNo){
 
     Map<String, Object?> requestParm = toHashMap( restauranteName, email, address,
          landmark, city, state, country, pinCode, mobileNo);
@@ -218,14 +267,14 @@ void sharedPrefEraseAllData(){
   Map<String, String> toHashMap(String restauranteName,String email,String address,
       String landmark,String city,String state,String country,String pinCode,String mobileNo) => {
     WebFields.SHOP_NAME : restauranteName,
-    WebFields.email : email,
-    WebFields.address : address,
-    WebFields.landmark : landmark,
-    WebFields.city : city,
-    WebFields.state : state,
-    WebFields.country : country,
-    WebFields.pinCode : pinCode,
-    WebFields.mobileNo : mobileNo
+    WebFields.EMAIL : email,
+    WebFields.ADDRESS : address,
+    WebFields.LANDMARK : landmark,
+    WebFields.CITY : city,
+    WebFields.STATE : state,
+    WebFields.COUNTRY : country,
+    WebFields.PINCODE : pinCode,
+    WebFields.MOBILE : mobileNo
   };
 
 
