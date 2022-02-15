@@ -24,64 +24,15 @@ class Utilities {
     titleText: Text(title, style: TextStyle(color: AppColor.colorError, fontSize: 14)),
     icon: Icon(Icons.error, color: Colors.red, size: 30)
     );
-
-    // ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(SnackBar(
-    //   content: Container(
-    //     color: Colors.white,
-    //     child: Padding(
-    //       padding: const EdgeInsets.all(8.0),
-    //       child: Row(
-    //         children: <Widget>[
-    //           Icon(
-    //             Icons.error,
-    //             color: Colors.red,
-    //             size: 30,
-    //           ),
-    //           SizedBox(
-    //             width: 8,
-    //           ),
-    //           Flexible(
-    //               child: Text(
-    //             msg,
-    //             style: TextStyle(color: AppColor.colorTheme, fontSize: 14),
-    //           )),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    //   duration: Duration(seconds: 2),
-    //   backgroundColor: Colors.white,
-    // ));
   }
 
-  static showSuccessMessage(GlobalKey<ScaffoldState> scaffoldKey, String msg) {
-    ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(SnackBar(
-      content: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.check_circle,
-                color: Colors.green,
-                size: 25,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                  child: Text(
-                msg,
-                style: TextStyle(color: AppColor.colorTheme, fontSize: 14),
-              )),
-            ],
-          ),
-        ),
-      ),
-      duration: Duration(seconds: 2),
-      backgroundColor: Colors.white,
-    ));
+  static showSuccessMessage(String title, {String? message = 'Successfully done',bool snackbarPositonBottom = true}) {
+
+    Get.snackbar(title, message!,snackPosition: snackbarPositonBottom==true ? SnackPosition.BOTTOM : SnackPosition.TOP,
+        titleText: Text(title, style: TextStyle(color: AppColor.colorLightBlack, fontSize: 14)),
+        icon: Icon(Icons.check_circle, color: Colors.lightGreenAccent, size: 30)
+    );
+
   }
 
   static launchCall(String number) async {

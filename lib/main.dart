@@ -6,21 +6,20 @@ import 'package:sizzlingtaste/App.dart';
 import 'package:sizzlingtaste/UI/DashBoard.dart';
 import 'package:sizzlingtaste/UI/SignIn.dart';
 
+import 'UI/CreateAccountShop.dart';
 import 'controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  final controller = Get.put(HomeController());
 
 
-  Widget? _defaultWidget;
+  Widget _defaultWidget;
+  late var userdata = GetStorage();
 
-  controller.getUserMobileNo("userMobile");
-
-  if (controller.phoneNoText.value != "") {
-    _defaultWidget = DashBoard();
+  if (userdata.read("userMobile") != null) {
+    _defaultWidget = CreateAccountShop();
   } else {
     _defaultWidget = SignIn();
   }

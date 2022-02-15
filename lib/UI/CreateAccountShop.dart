@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,12 +25,13 @@ class CreateAccountShop extends StatelessWidget {
       appBar: AppBar(title: Text("controller.isUpdate.value",style: Utilities.setTextStyle(
         AppFontWeight.subHeader, AppFontWeight.semiBold),)),
 
-        body: Container(
+        body: Obx(()=> Container(
           padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
           child: SingleChildScrollView(
             child: Expanded(
               child: Column(
                 children: [
+                  // Obx(()=>
                 CustomTextFiled(
                 textField: controller.teRestroName,
                 labelText: AppStrings.restaurantName,
@@ -40,42 +40,54 @@ class CreateAccountShop extends StatelessWidget {
                 readOnly: false,
                 errorText: controller.errorMessageList[0],
                 onChange: (text){
-                  controller.isValidate();
-                }),
+                  controller.isValidate();}),
+            // ),
 
-                    CustomTextFiled(
-                        textField: controller.teAddress,
-                        labelText: AppStrings.address,
-                        hintText: AppStrings.address,
-                        length: 140,
-                        readOnly: false,
-                        errorText: controller.errorMessageList[1],
-                        onChange: (text){
-                          controller.isValidate();
-                        }),
+                CustomTextFiled(
+                    textField: controller.teEmail,
+                    labelText: AppStrings.email,
+                    readOnly: false,
+                    length: 140,
+                    hintText: AppStrings.email,
+                    errorText: controller.errorMessageList[1],
+                    onChange: (text) {
+                      controller.isValidate();
+                    }),
+
+                CustomTextFiled(
+                    textField: controller.teAddress,
+                    labelText: AppStrings.address,
+                    hintText: AppStrings.address,
+                    length: 140,
+                    readOnly: false,
+                    errorText: controller.errorMessageList[2],
+                    onChange: (text) {
+                      controller.isValidate();
+                    }),
 
                   CustomTextFiled(
-                  textField: controller.teEmail,
-                  labelText: AppStrings.email,
-                  readOnly: false,
-                  length: 140,
-                  hintText: AppStrings.email,
-                  errorText: controller.errorMessageList[2],
-                  onChange: (text){
-                    controller.isValidate();
-                  }),
+                      textField: controller.teLandmark,
+                      labelText: AppStrings.landmark,
+                      hintText: AppStrings.landmark,
+                      readOnly: false,
+                      length: 140,
+                      errorText: controller.errorMessageList[3],
+                      onChange: (text){
+                        // controller.isValidate();
+                      }),
 
 
-                    CustomTextFiled(
-                        textField: controller.teCity,
-                        labelText: AppStrings.city,
-                        hintText: AppStrings.city,
-                        readOnly: false,
-                        length: 140,
-                        errorText: controller.errorMessageList[3],
-                        onChange: (text){
-                          controller.isValidate();
-                        }),
+                  CustomTextFiled(
+                      textField: controller.teCity,
+                      labelText: AppStrings.city,
+                      hintText: AppStrings.city,
+                      readOnly: false,
+                      length: 140,
+                      errorText: controller.errorMessageList[4],
+                      onChange: (text){
+                        controller.isValidate();
+                      }),
+
 
 
                     CustomTextFiled(
@@ -84,7 +96,7 @@ class CreateAccountShop extends StatelessWidget {
                         hintText: AppStrings.state,
                         readOnly: false,
                         length: 140,
-                        errorText: controller.errorMessageList[4],
+                        errorText: controller.errorMessageList[5],
                         onChange: (text){
                           controller.isValidate();
                         }),
@@ -95,61 +107,53 @@ class CreateAccountShop extends StatelessWidget {
                         hintText: AppStrings.country,
                         readOnly: false,
                         length: 140,
-                        errorText: controller.errorMessageList[5],
+                        errorText: controller.errorMessageList[6],
                         onChange: (text){
                           controller.isValidate();
                         }),
 
                   CustomTextFiled(
-                  textField: controller.teLandmark,
-                  labelText: AppStrings.landmark,
-                  hintText: AppStrings.landmark,
-                  readOnly: false,
-                  length: 140,
-                  // errorText: controller.errorMessageList[6],
-                  onChange: (text){
-                    // controller.isValidate();
-                  }),
-
-
-
-                  CustomTextFiled(
-                  textField: controller.tePinCode,
-                  labelText: AppStrings.pinCode,
-                  hintText: AppStrings.pinCode,
-                  readOnly: false,
-                  length: 6,
-                  textInputType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                      // errorText: controller.errorMessageList[7],
+                      textField: controller.tePinCode,
+                      labelText: AppStrings.pinCode,
+                      hintText: AppStrings.pinCode,
+                      readOnly: false,
+                      length: 6,
+                      textInputType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      errorText: controller.errorMessageList[7],
                       onChange: (text){
                         // controller.isValidate();
                       }),
 
 
-                    CustomButton(
-                        buttonTitle: AppStrings.submit, onTapButton: (){
-                          controller.isValidate();
-                          Get.to(() => DashBoard());
-                      controller.addRestaurantData(
-                        controller.teRestroName.text.toString(),
-                        controller.teEmail.text.toString(),
-                        controller.teAddress.text.toString(),
-                        controller.teLandmark.text.toString(),
-                        controller.teCity.text.toString(),
-                        controller.teState.text.toString(),
-                        controller.teCountry.text.toString(),
-                        controller.tePinCode.text.toString(),
-                          controller.sharedPrefRead("userMobile").toString()
-                        // controller.teMobileNo.text.toString()
-                      );
-                    })
-                ],
+                  CustomButton(
+                    buttonTitle: AppStrings.submit,
+                    onTapButton: () {
+                      if (controller.isValidate().isTrue) {
+                        controller.addRestaurantData(
+                            controller.teRestroName.text.toString(),
+                            controller.teEmail.text.toString(),
+                            controller.teAddress.text.toString(),
+                            controller.teLandmark.text.toString(),
+                            controller.teCity.text.toString(),
+                            controller.teState.text.toString(),
+                            controller.teCountry.text.toString(),
+                            controller.tePinCode.text.toString(),
+                            controller.sharedPrefRead("userMobile").toString()
+                            // controller.teMobileNo.text.toString()
+                            );
+                        Get.offAll(() => DashBoard());
+                      }
+                      else{
+                        controller.isValidate();
+                      }
+                    }),
+              ],
         ),
               ),
             ),
           ),
-      );
+      ));
   }
 
 

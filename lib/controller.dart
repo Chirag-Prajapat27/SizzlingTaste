@@ -23,7 +23,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   // Create a CollectionReference called users that references the firestore collection
   CollectionReference users = FirebaseFirestore.instance.collection('Restaurant');
 
-  List <String> errorMessageList = ['','','','','','','','',''];
+  List<String> errorMessageList = ['','','','','','','','',''].obs;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final teMobileNo = TextEditingController();
@@ -129,7 +129,7 @@ void sharedPrefEraseAllData(){
       sharedPrefWrite("userMobile", value.user!.phoneNumber.toString());
 
 
-      Get.to(() => CreateAccountShop());
+      Get.offAll(() => CreateAccountShop());
       print(value.user.toString());
     }).catchError((e) {
       if (e.message!.contains('network')) {
@@ -182,79 +182,71 @@ void sharedPrefEraseAllData(){
     );
   }
 
-  bool isValidate() {
-    bool verify = true;
+  RxBool isValidate() {
+    RxBool verify = true.obs;
+
+
     for (int v = 0; v < errorMessageList.length; v++) {
       if (v == 0) {
         if (teRestroName.text.toString().trim().isEmpty) {
           errorMessageList[0] = "Please Enter Restaurant Name";
-          verify = false;
+          verify = false as RxBool;
         } else {
           errorMessageList[0] = "";
         }
       } else if (v == 1) {
-        if (teAddress.text.toString().trim().isEmpty) {
-          errorMessageList[1] = "Please enter your address";
-          verify = false;
+        if (teEmail.text.toString().trim().isEmpty) {
+          errorMessageList[1] = "Please enter eMail";
+
+          verify = false as RxBool;
         } else {
           errorMessageList[1] = "";
         }
       } else if (v == 2) {
-        if (teEmail.text.toString().trim().isEmpty) {
-          errorMessageList[2] = "Please enter eMail";
-          verify = false;
+        if (teAddress.text.toString().trim().isEmpty) {
+          errorMessageList[2] = "Please enter your address";
+          verify = false as RxBool;
         } else {
           errorMessageList[2] = "";
         }
       } else if (v == 3) {
-        if (teCity.text.toString().trim().isEmpty) {
-          errorMessageList[3] = "Please enter your city";
-          verify = false;
+        if (teLandmark.text.toString().trim().isEmpty) {
+          errorMessageList[3] = "Please enter your Landmark";
+          verify = false as RxBool;
         } else {
           errorMessageList[3] = "";
         }
       } else if (v == 4) {
-        if (teState.text.toString().trim().isEmpty) {
-          errorMessageList[4] = "Please enter your state";
-          verify = false;
+        if (teCity.text.toString().trim().isEmpty) {
+          errorMessageList[4] = "Please enter your city";
+          verify = false as RxBool;
         } else {
           errorMessageList[4] = "";
         }
       } else if (v == 5) {
-        if (teCountry.text.toString().trim().isEmpty) {
-          errorMessageList[5] = "Please enter your Country";
-          verify = false;
+        if (teState.text.toString().trim().isEmpty) {
+          errorMessageList[5] = "Please enter your state";
+          verify = false as RxBool;
         } else {
           errorMessageList[5] = "";
         }
       } else if (v == 6) {
-        if (teLandmark.text.toString().trim().isEmpty) {
+        if (teCountry.text.toString().trim().isEmpty) {
           errorMessageList[6] = "Please enter your Country";
-          verify = false;
+          verify = false as RxBool;
         } else {
           errorMessageList[6] = "";
         }
       } else if (v == 7) {
         if (tePinCode.text.toString().trim().isEmpty) {
           errorMessageList[7] = "Please enter your Country";
-          verify = false;
+          verify = false as RxBool;
         } else {
           errorMessageList[7] = "";
         }
       }
     }
     return verify;
-  }
-
-  // addRestaurantData(HashMap<String, Object> data){
-  addRestaurantData(String restauranteName,String email,String address,String landmark,String city,String state,String country,String pinCode,String mobileNo){
-
-    Map<String, Object?> requestParm = toHashMap( restauranteName, email, address,
-         landmark, city, state, country, pinCode, mobileNo);
-
-    users.doc().update(requestParm).then((value) => Utilities.showSnackBar("Data add successfully"))
-        .catchError((onError)=> Utilities.showError("Failed to add user: $onError"));
-
   }
 
   //default function for autofill otp
@@ -264,9 +256,20 @@ void sharedPrefEraseAllData(){
     teOtpTextController.text = code!;
   }
 
-  Map<String, String> toHashMap(String restauranteName,String email,String address,
+  // addRestaurantData(HashMap<String, Object> data){
+  addRestaurantData(String restaurantName,String email,String address,String landmark,String city,String state,String country,String pinCode,String mobileNo){
+
+    Map<String, Object?> requestParm = toHashMap( restaurantName, email, address,
+         landmark, city, state, country, pinCode, mobileNo);
+
+    users.doc().update(requestParm).then((value) => Utilities.showSnackBar("Data add successfully"))
+        .catchError((onError)=> Utilities.showError("Failed to add user: $onError"));
+
+  }
+
+  Map<String, Object> toHashMap(String restaurantName,String email,String address,
       String landmark,String city,String state,String country,String pinCode,String mobileNo) => {
-    WebFields.SHOP_NAME : restauranteName,
+    WebFields.SHOP_NAME : restaurantName,
     WebFields.EMAIL : email,
     WebFields.ADDRESS : address,
     WebFields.LANDMARK : landmark,
@@ -276,6 +279,10 @@ void sharedPrefEraseAllData(){
     WebFields.PINCODE : pinCode,
     WebFields.MOBILE : mobileNo
   };
+
+
+
+
 
 
 }
