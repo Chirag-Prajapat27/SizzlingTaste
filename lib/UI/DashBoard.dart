@@ -245,6 +245,12 @@ class DashBoard extends StatelessWidget {
                               color: AppColor.colorGray,
                               child: Column(
                                 children: [
+                                  // const Padding(
+                                  //   padding:
+                                  //   EdgeInsets.only(top: 10, bottom: 10),
+                                  //   child: Icon(Icons.info_rounded,size: 18),
+                                  // ),
+
 // DROPDOWN AND GO BUTTON
                                   Padding(
                                     padding:
@@ -278,6 +284,7 @@ class DashBoard extends StatelessWidget {
                                       child: Container(
                                         alignment: Alignment.center,
                                         height: 50,
+                                        // width: ,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(15.0),
                                           color: AppColor.colorError,
@@ -491,9 +498,11 @@ class DashBoard extends StatelessWidget {
                     ),
                   ),
                   // _isLoading ? Loader() : Container()
+
                 ],
               ),
             ),
+
 
 
             drawer: Drawer(
@@ -518,10 +527,7 @@ class DashBoard extends StatelessWidget {
                 ],
               ),
             ),
-// bottomNavigationBar: BottomNavigationBar(
-//   onTap: controllerData.tabIndex,
-//   items: [],
-// ),
+
         );
       },
     );

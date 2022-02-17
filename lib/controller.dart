@@ -1,7 +1,8 @@
-import 'dart:collection';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +23,10 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
   // Create a CollectionReference called users that references the firestore collection
+  // FirebaseFirestore firestore  = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('Restaurant');
-  List<String> errorMessageList = ['','','','','','','','',''].obs;
 
+  List<String> errorMessageList = ['','','','','','','','',''].obs;
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final teMobileNo = TextEditingController();
@@ -179,7 +181,7 @@ void sharedPrefEraseAllData(){
         }
 
         if (error.message!.contains('network')) {
-          Utilities.showSnackBar('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
+          Utilities.showError('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
         }
 
       },
