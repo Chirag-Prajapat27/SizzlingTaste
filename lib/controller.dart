@@ -38,6 +38,8 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   var tePinCode = TextEditingController();
   var teOtpTextController = TextEditingController();
 
+  var tabIndex = 0;
+
   RxString phoneNoText = "".obs;
   // var isUpdate = "".obs;
   RxBool? isUpdate;
@@ -263,9 +265,17 @@ void sharedPrefEraseAllData(){
     teOtpTextController.text = code!;
   }
 
+
   // Get Restaurant Data from FireStore
-  FutureBuilder<DocumentSnapshot> getRestaurantData(){
-   users.get();
+  var getFireData = FirebaseFirestore.instance.collection('Restaurant');        // Get Restaurant Data from FireStore
+  Future<void> getData() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await getFireData.get();
+
+    // Get data from docs and convert map to List
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    print(allData);
   }
 
   // addRestaurantData(HashMap<String, Object> data){
@@ -276,7 +286,7 @@ void sharedPrefEraseAllData(){
 
     users.doc().set(requestParm).then((value) => Utilities.showSnackBar("Data add successfully"))
         .catchError((onError)=> Utilities.showError("Failed to add user: $onError"));
-
+print(" Get DATA IS:== $getData()");
     print("MY DATA IS:-- $requestParm");
   }
 
