@@ -1,4 +1,4 @@
-import 'dart:collection';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -168,7 +168,6 @@ void sharedPrefEraseAllData(){
 
       verificationFailed: (FirebaseAuthException error) {
         if(error.code == ''){
-          Utilities.showError("Phone Number is incorrect",message: "Please fill correct mobile no.");
           print("Phone Number is incorrect");
         }
         if(error.code == 'invalid-phone-number') {
@@ -267,8 +266,10 @@ void sharedPrefEraseAllData(){
   }
 
   // Get Restaurant Data from FireStore
-  FutureBuilder<DocumentSnapshot> getRestaurantData(){
-   users.get();
+  getRestaurantData(){
+
+   users.snapshots().map((QuerySnapshot query) => print(query.toString()));
+
   }
 
   // addRestaurantData(HashMap<String, Object> data){

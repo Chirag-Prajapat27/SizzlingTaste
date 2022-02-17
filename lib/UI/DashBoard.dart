@@ -278,6 +278,7 @@ class DashBoard extends StatelessWidget {
                                     child: InkWell(
                                       onTap: () {
                                         // Navigation.push(context, SearchVendor());
+                                        controllerData.getRestaurantData();
                                         print('Go Button Pressed');
                                       },
                                       child: Container(
