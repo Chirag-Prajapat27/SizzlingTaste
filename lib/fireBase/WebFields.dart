@@ -18,15 +18,15 @@ class WebFields {
   static const String LOCATION = "location";
   static const String ADDRESS = "address";
   static const String DELIVERY_CHARGE = "deliverycharge";
-  static const String MOBILE = "mobile";
+  static const String RESTAURANT_MOBILE = "restaurant_mobile";
 
   static const String EMAIL = "email";
 
   static const String OPEN_STATUS = "open_status";
   static const String SHOP_CONTACT = "shop_contact";
-  static const String SHOP_IMAGE = "shop_image";
-  static const String SHOP_NAME = "shop_name";
-  static const String SHOP_RATING = "shop_rating";
+  static const String RESTAURANT_IMAGE = "restaurant_image";
+  static const String RESTAURANT_NAME = "restaurant_name";
+  static const String RESTAURANT_RATING = "restaurant_rating";
 
 
 

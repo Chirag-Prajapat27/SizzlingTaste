@@ -338,88 +338,85 @@ class DashBoard extends StatelessWidget {
                               ],
                             ),
                           ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controllerData.trendingProducts.length,
-                              itemBuilder: (context, index){
-                              // return TrendingTilee(
-                              //   trendingProductModel: controllerData.trendingProducts[index],
-                              // );
+                          Container(
+                            height: MediaQuery.of(context).size.height/4,
+                            child: ListView.builder(
 
-                                return Row(
-                                  children: <Widget>[
-                                    Container(
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Image.network("https://www.dominos.co.in//files/items/Margherit.jpg", height: 200, width: 200,),
-                                          // Image.asset(
-                                          //   AppImages.zara,
-                                          //   height: MediaQuery.of(context).size.height,
-                                          //   width: MediaQuery.of(context).size.width / 3,
-                                          //   // color: AppColor.colorGreen,
-                                          //   fit: BoxFit.cover,
-                                          // ),
-                                          Container(
-                                            height: 25,
-                                            width: 50,
-                                            margin: EdgeInsets.only(left: 5, top: 5),
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(6),
-                                                gradient: LinearGradient(colors: [
-                                                  const Color(0xff8EA2FF).withOpacity(0.5),
-                                                  const Color(0xff557AC7).withOpacity(0.5)
-                                                ])),
-                                            child: Text(
-                                              '\u{20B9} ${controllerData.trendingProducts[index].price.toString()}', // RUPEE SYMBOL CODE
-                                              style: TextStyle(color: AppColor.colorError),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            controllerData.trendingProducts[index].productName.toString(),
-                                            // trendingProductModel!.productName.toString(),
-                                            style: TextStyle(color: AppColor.colorBlack, fontSize: 19),
-                                          ),
-                                          Text( controllerData.trendingProducts[index].restoName.toString(),
-                                            // trendingProductModel!.restoName.toString(),
-                                            style: TextStyle(
-                                              color: AppColor.colorBlack,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Container(
-                                            height: 30,
-                                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(4),
-                                                gradient: const LinearGradient(colors: [
-                                                  Color(0xff8EA2FF),
-                                                  Color(0xff557AC7)
-                                                ])),
-                                            child: const Text( "Add to cart",
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                );
+                              shrinkWrap: true,
+                              // physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controllerData.trendingProducts.length,
+                                itemBuilder: (context, index){
 
-                              }
+                                  return Row(
+                                    children: <Widget>[
+                                      Container(
+                                        child: Stack(
+                                          children: <Widget>[
+                                            Image.network("https://www.dominos.co.in//files/items/Margherit.jpg", height: MediaQuery.of(context).size.height/2, width: MediaQuery.of(context).size.width/2,),
+                                            Container(
+                                              height: MediaQuery.of(context).size.height/22,
+                                              width: MediaQuery.of(context).size.width/6,
+                                              margin: EdgeInsets.only(left: 5, top: 5),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(6),
+                                                  gradient: LinearGradient(colors: [
+                                                    const Color(0xff3EA2FF).withOpacity(0.5),
+                                                    const Color(0xff313AC7).withOpacity(0.5)
+                                                  ])),
+                                              child: Text(
+                                                '\u{20B9} ${controllerData.trendingProducts[index].price.toString()}', // RUPEE SYMBOL CODE
+                                                style: TextStyle(color: AppColor.colorError,fontSize: 18)
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              controllerData.trendingProducts[index].productName.toString(),
+                                              // trendingProductModel!.productName.toString(),
+                                              style: TextStyle(color: AppColor.colorBlack, fontSize: 19),
+                                            ),
+                                            Text( controllerData.trendingProducts[index].restoName.toString(),
+                                              // trendingProductModel!.restoName.toString(),
+                                              style: TextStyle(
+                                                color: AppColor.colorBlack,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Container(
+                                              height: 30,
+                                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(4),
+                                                  gradient: const LinearGradient(colors: [
+                                                    Color(0xff8EA2FF),
+                                                    Color(0xff557AC7)
+                                                  ])),
+                                              child: const Text( "Add to cart",
+                                                style: TextStyle(color: Colors.white),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  );
+
+                                }
+                            ),
                           )
+
                           // GridView.count(
                           //     mainAxisSpacing: 16.0,
                           //     crossAxisSpacing: 16.0,
@@ -573,89 +570,4 @@ class DashBoard extends StatelessWidget {
     );
   }
 }
-
-class TrendingTilee extends StatelessWidget {
-  const TrendingTilee({Key? key, this.trendingProductModel}) : super(key: key);
-  final TrendingProductModel? trendingProductModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          child: Stack(
-            children: <Widget>[
-              Image.network("https://www.dominos.co.in//files/items/Margherit.jpg", height: 200, width: 200,),
-              // Image.asset(
-              //   AppImages.zara,
-              //   height: MediaQuery.of(context).size.height,
-              //   width: MediaQuery.of(context).size.width / 3,
-              //   // color: AppColor.colorGreen,
-              //   fit: BoxFit.cover,
-              // ),
-              Container(
-                height: 25,
-                width: 50,
-                margin: EdgeInsets.only(left: 5, top: 5),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    gradient: LinearGradient(colors: [
-                      const Color(0xff8EA2FF).withOpacity(0.5),
-                      const Color(0xff557AC7).withOpacity(0.5)
-                    ])),
-                child: Text(
-                  '\u{20B9} ${trendingProductModel!.price.toString()}', // RUPEE SYMBOL CODE
-                  style: TextStyle(color: AppColor.colorError),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                trendingProductModel!.productName.toString(),
-                style: TextStyle(color: AppColor.colorBlack, fontSize: 19),
-              ),
-              Text(
-                trendingProductModel!.restoName.toString(),
-                style: TextStyle(
-                  color: AppColor.colorBlack,
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Container(
-                height: 30,
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    gradient: const LinearGradient(colors: [
-                      Color(0xff8EA2FF),
-                      Color(0xff557AC7)
-                    ])),
-                child: const Text( "Add to cart",
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
-
-
-
-
-
-
-
 

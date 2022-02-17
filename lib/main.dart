@@ -19,7 +19,8 @@ void main() async {
   late var userdata = GetStorage();
 
   if (userdata.read("userMobile") != null) {
-    _defaultWidget = CreateAccountShop();
+    // _defaultWidget = CreateAccountShop();
+    _defaultWidget = DashBoard();
   } else {
     _defaultWidget = SignIn();
   }
