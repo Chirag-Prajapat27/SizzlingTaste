@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,9 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   List <SideMenuDataModel> sideMenuData = <SideMenuDataModel> [].obs;
   // Create a CollectionReference called users that references the firestore collection
+  // FirebaseFirestore firestore  = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('Restaurant');
+  
 
   List<String> errorMessageList = ['','','','','','','','',''].obs;
 
@@ -159,6 +162,7 @@ void sharedPrefEraseAllData(){
 
       verificationFailed: (FirebaseAuthException error) {
         if(error.code == ''){
+          Utilities.showError("Phone Number is incorrect",message: "Please fill correct mobile no.");
           print("Phone Number is incorrect");
         }
         if(error.code == 'invalid-phone-number') {
@@ -170,7 +174,7 @@ void sharedPrefEraseAllData(){
         }
 
         if (error.message!.contains('network')) {
-          Utilities.showSnackBar('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
+          Utilities.showError('Please check your internet connection and try again',message: "Please on your wifi/mobile data");
         }
 
       },
@@ -262,9 +266,12 @@ void sharedPrefEraseAllData(){
     Map<String, Object?> requestParm = toHashMap( restaurantName, email, address,
          landmark, city, state, country, pinCode, mobileNo);
 
-    users.doc().update(requestParm).then((value) => Utilities.showSnackBar("Data add successfully"))
+    users.doc("hello").update(
+        {"restuaurantName": restaurantName}).then((value) => Utilities.showSnackBar("Data add successfully"))
         .catchError((onError)=> Utilities.showError("Failed to add user: $onError"));
 
+    // firestore.collection("Restaurant").doc().update(requestParm).
+    
   }
 
   Map<String, Object> toHashMap(String restaurantName,String email,String address,
