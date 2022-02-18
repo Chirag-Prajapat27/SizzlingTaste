@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,7 +14,6 @@ import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppColor.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/fireBase/WebFields.dart';
-import 'package:sizzlingtaste/model/RestaurantData.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:sizzlingtaste/model/staticData.dart';
 import 'package:sizzlingtaste/model/trendingProductModel.dart';
@@ -40,6 +40,8 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   var teCountry = TextEditingController();
   var tePinCode = TextEditingController();
   var teOtpTextController = TextEditingController();
+
+  var tabIndex = 0;
 
   RxString phoneNoText = "".obs;
   // var isUpdate = "".obs;
@@ -130,6 +132,7 @@ void sharedPrefEraseAllData(){
 
   // for verify OTP and user in firebase auth.
   otpVerify() async {
+
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationID.value, smsCode: otpCode.value.toString().trim());
 
@@ -138,6 +141,7 @@ void sharedPrefEraseAllData(){
       Utilities.showSnackBar(value.user!.phoneNumber.toString(),message: "Login Successfully Done");
 
       sharedPrefWrite("userMobile", value.user!.phoneNumber.toString());
+
       isLoading = false.obs;                         // loader 4/4
       Get.offAll(() => CreateAccountShop());
       print(value.user.toString());
@@ -266,28 +270,29 @@ void sharedPrefEraseAllData(){
     teOtpTextController.text = code!;
   }
 
+
+  // Check If User is already Registered or not from firestore database
+  // var CheckFireData = FirebaseFirestore.instance.collection('Restaurant');
+  Future<void> checkMobileData(String mobNumber) async {
+    // var checkFireData = FirebaseFirestore.instance.collection('Restaurant').where(FieldPath.documentId,isEqualTo: mobNumber).get();
+var checkFireData = FirebaseFirestore.instance.collection('Restaurant').doc(mobNumber).get();
+
+    // final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    print("sdsdsd=== $checkFireData");
+  }
+
+
   // Get Restaurant Data from FireStore
-  /*FutureBuilder<DocumentSnapshot> */
-  getRestaurantData() async {
-     var db = FirebaseFirestore.instance.collection('Restaurant');
+  var getFireData = FirebaseFirestore.instance.collection('Restaurant');  // Get Restaurant Data from FireStore
+  Future<void> getData() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await getFireData.get();
 
+    // Get data from docs and convert map to List
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
 
-    // QuerySnapshot<Map<String, dynamic>> data = await db.get();
-
-    QuerySnapshot querySnapshot = await db.get();
-
-    final alldata = querySnapshot.docs.map((e) => e.data()).toList();
-    print(alldata);
-
-    //
-    // // List<Object> objList = data.docs.map<Object>((data) =>
-    // // new Shop(
-    // //     field1: data['field1'],
-    // //     field2: List.castFrom(data['field2'])
-    // // )
-    // // ).toList();
-    // print(data.size);
-
+    print("qqqqqq== $allData");
   }
 
   // addRestaurantData(HashMap<String, Object> data){
@@ -296,9 +301,9 @@ void sharedPrefEraseAllData(){
     Map<String, Object?> requestParm = toHashMap( restaurantName, email, address,
          landmark, city, state, country, pinCode, mobileNo);
 
-    users.doc().set(requestParm).then((value) => Utilities.showSnackBar("Data add successfully"))
+    users.doc(mobileNo).set(requestParm).then((value) => Utilities.showSnackBar("Data add successfully"))
         .catchError((onError)=> Utilities.showError("Failed to add user: $onError"));
-
+print(" Get DATA IS:== $getData()");
     print("MY DATA IS:-- $requestParm");
   }
 
