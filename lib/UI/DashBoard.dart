@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
@@ -6,6 +6,7 @@ import 'package:sizzlingtaste/UI/SignIn.dart';
 import 'package:sizzlingtaste/constants/AppColor.dart';
 import 'package:sizzlingtaste/constants/AppFontWeight.dart';
 import 'package:sizzlingtaste/controller.dart';
+import 'package:sizzlingtaste/fireBase/WebFields.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:sizzlingtaste/model/trendingProductModel.dart';
 import 'package:sizzlingtaste/utility/Utilities.dart';
@@ -107,6 +108,15 @@ class DashBoard extends StatelessWidget {
                 )
                 ),
               ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.green,
+              child: Icon(Icons.add),
+              onPressed: () {
+                // FirebaseFirestore.instance.collection('Restaurant').add({'text': 'data added through app'});
+                // FirebaseFirestore.instance.collection('Restaurant').get(FieldPath.documentId).
+                // FirebaseFirestore.instance.collection('Restaurant').add(controllerData.addRestaurantData(WebFields.RESTAURANT_NAME, WebFields.EMAIL, WebFields.ADDRESS, 'landmark', 'city', 'state', 'country', 'pinCode', 'mobileNo'));
+              },
             ),
             body:
             SingleChildScrollView(
@@ -245,11 +255,6 @@ class DashBoard extends StatelessWidget {
                               color: AppColor.colorGray,
                               child: Column(
                                 children: [
-                                  // const Padding(
-                                  //   padding:
-                                  //   EdgeInsets.only(top: 10, bottom: 10),
-                                  //   child: Icon(Icons.info_rounded,size: 18),
-                                  // ),
 
 // DROPDOWN AND GO BUTTON
                                   Padding(
