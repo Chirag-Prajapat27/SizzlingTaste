@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:sizzlingtaste/UI/CategoryAdd.dart';
 import 'package:sizzlingtaste/UI/SignIn.dart';
 import 'package:sizzlingtaste/constants/AppColor.dart';
 import 'package:sizzlingtaste/constants/AppFontWeight.dart';
 import 'package:sizzlingtaste/controller.dart';
-import 'package:sizzlingtaste/fireBase/WebFields.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
-import 'package:sizzlingtaste/model/trendingProductModel.dart';
 import 'package:sizzlingtaste/utility/Utilities.dart';
 
 class DashBoard extends StatelessWidget {
@@ -34,8 +32,7 @@ class DashBoard extends StatelessWidget {
           children: [
              const Icon(
               Icons.notifications,
-              size: 26,
-            ),
+              size: 26),
             Container(
               height: 30,
               width: 30,
@@ -96,29 +93,21 @@ class DashBoard extends StatelessWidget {
     return Obx(
       () {
         return Scaffold(
-            appBar: AppBar(title: const Text('Sizzling Taste'),
+          appBar: AppBar(
+            title: const Text('Sizzling Taste'),
             actions: [
               InkWell(
-                onTap: () {
-                  print(_counter); //MSG COUNTER oN NOTIFICATION SIDE...
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 14,right: 10,bottom: 10,left: 16),
-                  child: myAppBarIcon(),
-                )
-                ),
-              ],
-            ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.green,
-              child: Icon(Icons.add),
-              onPressed: () {
-                // FirebaseFirestore.instance.collection('Restaurant').add({'text': 'data added through app'});
-                // FirebaseFirestore.instance.collection('Restaurant').get(FieldPath.documentId).
-                // FirebaseFirestore.instance.collection('Restaurant').add(controllerData.addRestaurantData(WebFields.RESTAURANT_NAME, WebFields.EMAIL, WebFields.ADDRESS, 'landmark', 'city', 'state', 'country', 'pinCode', 'mobileNo'));
-              },
-            ),
-            body:
+                  onTap: () {
+                    print(_counter); //MSG COUNTER oN NOTIFICATION SIDE...
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 14, right: 10, bottom: 10, left: 16),
+                    child: myAppBarIcon(),
+                  )),
+            ],
+          ),
+          body:
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -133,9 +122,7 @@ class DashBoard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const Icon(Icons.fastfood, size: 40,color: AppColor.colorPrimary,),
-                            const SizedBox(
-                              width: 5,
-                            ),
+                            const SizedBox(width: 5),
                             Text("Hotel The Taj",
                                 style: Utilities.setTextStyle(
                                     AppFontWeight.header, AppFontWeight.bold,
@@ -143,9 +130,7 @@ class DashBoard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const SizedBox(height: 16),
                         InkWell(
                           onTap: () {
                             Get.to(() => DashBoard());
@@ -158,15 +143,9 @@ class DashBoard extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                Container(
-                                  child: const Icon(Icons.map_outlined, size: 20),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
+                                const SizedBox(width: 12),
+                                Container(child: const Icon(Icons.map_outlined, size: 20)),
+                                const SizedBox(width: 10),
                                 Expanded(
                                   child: TextField(
                                       enabled: true,
@@ -177,8 +156,7 @@ class DashBoard extends StatelessWidget {
                                             AppFontWeight.subTitleText,
                                             AppFontWeight.regular,
                                             color: AppColor.colorWorkingHours),
-                                        contentPadding: const EdgeInsets.all(0),
-                                      ),
+                                        contentPadding: const EdgeInsets.all(0)),
                                       style: Utilities.setTextStyle(
                                           AppFontWeight.subTitleText,
                                           AppFontWeight.regular,
@@ -189,9 +167,7 @@ class DashBoard extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10),
 
 // SEARCH BAR
                         InkWell(
@@ -205,15 +181,9 @@ class DashBoard extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                Container(
-                                  child: const Icon(Icons.search, size: 20),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
+                                const SizedBox(width: 12),
+                                Container(child: const Icon(Icons.search, size: 20)),
+                                const SizedBox(width: 10),
                                 Expanded(
                                   child: TextField(
                                     enabled: true,
@@ -235,9 +205,7 @@ class DashBoard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
@@ -265,8 +233,7 @@ class DashBoard extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(6.0),
                                         // border: Border.all(color: AppColor.colorGreen,width: 2),
-                                        color: AppColor.colorSystemWhite,
-                                      ),
+                                        color: AppColor.colorSystemWhite),
                                       height: 40,
                                       width: MediaQuery.of(context).size.width - 30,
                                       child: Padding(
@@ -284,6 +251,7 @@ class DashBoard extends StatelessWidget {
                                       onTap: () {
                                         // Navigation.push(context, SearchVendor());
                                         controllerData.getData();
+                                        Get.to(()=> const CategoryAdd());
                                         print('Go Button Pressed');
                                       },
                                       child: Container(
