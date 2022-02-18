@@ -22,7 +22,8 @@ void main() async {
     // _defaultWidget = CreateAccountShop();
     _defaultWidget = DashBoard();
   } else {
-    _defaultWidget = SignIn();
+    _defaultWidget = DashBoard();
+    // _defaultWidget = SignIn();
   }
 
   // _defaultWidget =  DashBoard();

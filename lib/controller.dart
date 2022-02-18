@@ -13,6 +13,7 @@ import 'package:sizzlingtaste/UI/OtpScreen.dart';
 import 'package:sizzlingtaste/constants/AppColor.dart';
 import 'package:sizzlingtaste/constants/AppStrings.dart';
 import 'package:sizzlingtaste/fireBase/WebFields.dart';
+import 'package:sizzlingtaste/model/RestaurantData.dart';
 import 'package:sizzlingtaste/model/sideMenuDataModel.dart';
 import 'package:sizzlingtaste/model/staticData.dart';
 import 'package:sizzlingtaste/model/trendingProductModel.dart';
@@ -266,9 +267,26 @@ void sharedPrefEraseAllData(){
   }
 
   // Get Restaurant Data from FireStore
-  getRestaurantData(){
+  /*FutureBuilder<DocumentSnapshot> */
+  getRestaurantData() async {
+     var db = FirebaseFirestore.instance.collection('Restaurant');
 
-   users.snapshots().map((QuerySnapshot query) => print(query.toString()));
+
+    // QuerySnapshot<Map<String, dynamic>> data = await db.get();
+
+    QuerySnapshot querySnapshot = await db.get();
+
+    final alldata = querySnapshot.docs.map((e) => e.data()).toList();
+    print(alldata);
+
+    //
+    // // List<Object> objList = data.docs.map<Object>((data) =>
+    // // new Shop(
+    // //     field1: data['field1'],
+    // //     field2: List.castFrom(data['field2'])
+    // // )
+    // // ).toList();
+    // print(data.size);
 
   }
 
